@@ -14,7 +14,15 @@ import { ToastComponent } from './components/toast/toast.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 
-
+const firebaseConfig = {
+  apiKey: "AIzaSyDFS-2rJTcwby8d9K0PY6cw82haLpsfKOQ",
+authDomain: "scenic-setup-298622.firebaseapp.com",
+databaseURL: "https://scenic-setup-298622-default-rtdb.firebaseio.com",
+projectId: "scenic-setup-298622",
+storageBucket: "scenic-setup-298622.appspot.com",
+messagingSenderId: "645397347517",
+appId: "1:645397347517:web:7e5290e77b6530c9484bd4"
+}
 
 @NgModule({
   declarations: [
@@ -30,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     FormsModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig),
     HttpClientModule
   ],
   providers: [],
