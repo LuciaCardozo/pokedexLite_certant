@@ -1,0 +1,30 @@
+.cardBodyLogin{
+    margin-top: 120px;
+    padding: 50px;
+}
+
+input::placeholder,p,input {
+    color: #0275d8; 
+    text-align: center;
+    background-color: transparent;
+}
+
+.contenedor{
+    flex-wrap: wrap;
+}
+
+.imgAutoCompletar{
+    border-radius: 40px; 
+    width: 80px;
+    height: 80px;
+}
+
+.imgAutoCompletar:active{
+    transform: scale(0.95);
+}
+
+a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

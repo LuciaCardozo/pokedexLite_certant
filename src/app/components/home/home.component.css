@@ -1,0 +1,46 @@
+.inputContainer>input{
+    text-align: center; 
+    border:1px solid rgb(162, 159, 159);
+}
+
+.inputContainer{
+    border:1px solid rgb(162, 159, 159);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    margin-bottom: 10px;
+}
+
+.btnSalir{
+    position: absolute;
+    right: 2rem;
+    top:1rem;
+}
+
+.card-body{
+    max-height: 60vh;
+    overflow: scroll;
+}
+
+.card-body::-webkit-scrollbar{
+    display: none;
+}
+
+.btnNew{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    margin: 10px;
+    text-align: center; 
+    border:1px solid rgb(162, 159, 159);
+    background-color: transparent;
+}
+
+.btnNew:active{
+    transform: scale(0.95);
+}
+
+input::placeholder,.card-header,.btnNew,p{
+    color: #0275d8; 
+}

@@ -1,0 +1,87 @@
+.input-file{
+    display: none;
+}
+
+input::placeholder,.card-header,p{
+color: #0275d8; 
+}
+
+.labelEvolution{
+    border:1px solid rgb(162, 159, 159);
+    height: 5rem;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.labelInputImg{
+    border:1px solid rgb(162, 159, 159);
+    height: 10rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0275d8; 
+    cursor: pointer;
+}
+
+.custom-input-file{
+    width: 100%;
+    margin: 5px;
+}
+
+.inputItems{
+    text-align: center;
+    border:1px solid rgb(162, 159, 159);
+    height: 15rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #0275d8; 
+    margin: 5px;
+}
+
+.ulSeleccion{
+    cursor: pointer;
+}
+
+.inputContainer>input{
+    text-align: center; 
+    border:1px solid rgb(162, 159, 159);
+}
+
+.inputContainer{
+    border:1px solid rgb(162, 159, 159);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 5px;
+}
+
+.btnSalir{
+    position: absolute;
+    right: 2rem;
+    top:1rem;
+}
+
+.btnActive:active{
+    transform: scale(0.95)
+}
+
+.abilitiesContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+.contenedor{
+    flex-wrap: wrap;
+}
+
+.labelTipo{
+    margin-left: 2px;
+    background-color: rgb(115, 236, 236);
+}
