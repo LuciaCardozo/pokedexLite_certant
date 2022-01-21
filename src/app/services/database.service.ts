@@ -4,8 +4,16 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
 import { environment } from 'src/environments/environment';
-
-firebase.initializeApp(environment.firebaseConfig);
+const firebaseConfig = {
+  apiKey: "AIzaSyDFS-2rJTcwby8d9K0PY6cw82haLpsfKOQ",
+authDomain: "scenic-setup-298622.firebaseapp.com",
+databaseURL: "https://scenic-setup-298622-default-rtdb.firebaseio.com",
+projectId: "scenic-setup-298622",
+storageBucket: "scenic-setup-298622.appspot.com",
+messagingSenderId: "645397347517",
+appId: "1:645397347517:web:7e5290e77b6530c9484bd4"
+}
+firebase.initializeApp(firebaseConfig);
 @Injectable({
   providedIn: 'root'
 })
