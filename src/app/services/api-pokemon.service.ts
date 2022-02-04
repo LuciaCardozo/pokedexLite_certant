@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListaPokemonesI } from '../Modelos/listaPokemones.interface';
 import { PokemonService } from '../swaggerApi';
 
 @Injectable({
@@ -24,21 +23,6 @@ export class ApiPokemonService {
 
   async putSwagger(pokemon:any){
     return await this.swaggerApi.pokemonPUT(pokemon).subscribe();
-  }
-
-  getAllPokemones(id:any):Observable<ListaPokemonesI[]>{
-    let direccion = "/pokedex-api/pokemon?userId="+id;
-    return this.http.get<ListaPokemonesI[]>(direccion);
-  }
-  
-  addPokemon(pokemon:any,id:any){
-    let direccion = "/pokedex-api/pokemon?userId="+id;
-    return this.http.post(direccion,pokemon);
-  }
-
-  updatePokemon(pokemon:any,id:any):Observable<ListaPokemonesI[]>{
-    let direccion = "/pokedex-api/pokemon?userId="+id;
-    return this.http.post<ListaPokemonesI[]>(direccion,pokemon);
   }
 
 }

@@ -14,20 +14,14 @@ export class LoginComponent implements OnInit {
     username: '',
     password: ''
   };
-  listaDeCorreos: any = [];
   isLogged = false;
-  userLogged:string = "";
 
-  constructor(private database: DatabaseService, private router: Router, private toastService: ToastService
-    , private route:ActivatedRoute) { 
+  constructor(private database: DatabaseService, private router: Router, private toastService: ToastService) { 
   }
 
-  async ngOnInit() {
-    
-  }
+  async ngOnInit() { }
 
   loginConValidacion() {
-
     if(this.usuario.username == "master" || this.usuario.username == "trainer" && this.usuario.password == "password"){
       try{
         this.database.isLogged = true;

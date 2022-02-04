@@ -11,12 +11,10 @@ import { PokemonService } from 'src/app/swaggerApi/api/pokemon.service'
 })
 export class HomeComponent implements OnInit {
   userId = this.route.snapshot.paramMap.get("id");
-  email:any;
-  //list: any = [];
   lista: any = [];
   pokemonSeleccionado: any;
   constructor(private router: Router, private afAuth: AngularFireAuth, private http: ApiPokemonService,
-    private route:ActivatedRoute,private swaggerApi:PokemonService) {
+    private route:ActivatedRoute) {
   }
 
   async ngOnInit() {

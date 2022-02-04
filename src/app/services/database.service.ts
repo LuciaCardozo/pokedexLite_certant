@@ -31,56 +31,6 @@ export class DatabaseService {
     this.user = this.afAuth.authState;
   }
 
-  async alta(coleccion: any, dato: any) {
-    try {
-      return await this.firestore.collection(coleccion).add(dato);
-    }
-    catch (error) {
-      alert(error);
-      return null;
-    }
-  }
-
-  //LOGIN
-  async onLogin(email: string, password: string) {
-    try {
-      this.emailUsuarioLogeado = email;
-      return await this.afAuth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.log("Error on login", error);
-      return error;
-    }
-  }
-
-  async onLoginWinthGoogle() {
-    try {
-      return await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    } catch (error) {
-      console.log("Error on login", error);
-      return error;
-    }
-  }
-
-  async traerTodo(coleccion: any) {
-    try {
-      return await this.firestore.collection(coleccion).snapshotChanges();
-    }
-    catch (error) {
-      alert(error);
-      return null;
-    }
-  }
-
-  async TraerPorId(coleccion:any,id:any){
-    try {
-      return await this.firestore.collection(coleccion).doc(id).snapshotChanges();
-    }
-    catch (error) {
-      alert(error);
-      return null;
-    }
-  }
-
   async subirImagen(nombre: string, img64: any) {
     try {
       console.log(img64);

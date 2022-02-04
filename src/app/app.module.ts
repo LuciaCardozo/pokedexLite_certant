@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { AddEditComponent } from './components/add-edit/add-edit.component';
 import { AngularFireModule} from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
 import { ToastComponent } from './components/toast/toast.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HttpClientModule } from '@angular/common/http';
