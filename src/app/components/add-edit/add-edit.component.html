@@ -7,67 +7,111 @@
                 Pokedex-Lite
             </div>
             <div class="card-body">
-                <div class="inputItems flexDirectionColumn">
-                    <h5>Tipo</h5>
-                    <div class="input-group mb-2 d-flex justify-content-center">
-                        <input type="text" style="width: 30%;" [(ngModel)]="tipoSeleccionado">
-                        <div *ngIf="existePokemon" class="input-group-append">
-                            <button class="btn btn-outline-danger" type="button" (click)="addType(pokemon,tipoSeleccionado)">Agregar</button>
-                          </div>
-                    </div>
-                    <label *ngIf="existePokemon">Seleccione el tipo a editar:</label>
-                    <ul class="ulSeleccion">
-                        <li (click)="tipoSeleccionado=type" *ngFor="let type of pokemon.type">{{type}}
-                            <button class="btn btn-outline-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="inputContainer">
-                    <label>Nombre</label>
-                    <input type="text" style="width: 60%;" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="pokemonNuevo.name">
-                    <label>Lvl</label>
-                    <input *ngIf="existePokemon" type="number" style="width:15%;" placeholder="{{pokemon.lvl}}" disabled>
-                    <input *ngIf="!existePokemon" type="number" style="width:15%;" placeholder="Lvl" [(ngModel)]="pokemonNuevo.lvl">
-                </div>
-                <div class="custom-input-file">
-                    <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
-                    <label *ngIf="existePokemon" class="labelInputImg" disabled><img src={{pokemon.image}} width="100px" height="100px" alt=""></label>
-                    <label *ngIf="!existePokemon" class="labelInputImg" for="inputImg">Subir Imagen</label>
-                </div>
-                <div class="inputItems flexDirectionColumn">  
-                    <h5>Habilidades</h5>  
-                    <div *ngIf="existePokemon">
-                        <div *ngFor="let ability of pokemon.abilities">
-                            <label>Nombre: {{ability.name}}</label>
-                            <br>
-                            <label>Descripcion: {{ability.description}}</label>
+                <!-- Para Modificar -->
+                <div *ngIf="existePokemon">
+                    <div class="inputItems flexDirectionColumn">
+                        <h5>Tipo</h5>
+                        <div class="input-group mb-2 d-flex justify-content-center">
+                            <input type="text" style="width: 30%;" [(ngModel)]="tipoSeleccionado">
+                            <div class="input-group-append" >
+                                <button class="btn btn-outline-danger" type="button" (click)="addType(pokemon,tipoSeleccionado)">Agregar</button>
+                            </div>
                         </div>
-                        
+                        <label >Seleccione el tipo a editar:</label>
+                        <ul class="ulSeleccion">
+                            <li (click)="tipoSeleccionado=type" *ngFor="let type of pokemon.type">{{type}}
+                                <button class="btn btn-outline-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
+                            </li>
+                        </ul>
                     </div>
-                    <div *ngIf="!existePokemon">
-                        <input class="text-center m-1"  type="text" placeholder="Nombre" [(ngModel)]="abilities.name">
-                        <input class="text-center m-1"  type="text" placeholder="Descripcion" [(ngModel)]="abilities.description">
+                    <div class="inputContainer">
+                        <label>Nombre</label>
+                        <input type="text" style="width: 60%;" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="nombreAEditar">
+                        <label>Lvl</label>
+                        <input type="number" style="width:15%;" placeholder="{{pokemon.lvl}}" disabled>
                     </div>
+                    <div class="custom-input-file">
+                        <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
+                        <label class="labelInputImg" disabled><img src={{pokemon.image}} width="100px" height="100px" alt=""></label>
+                    </div>
+                    <div class="inputItems flexDirectionColumn">  
+                        <h5 class="mt-2">Habilidades</h5>
+                            <div *ngFor="let ability of pokemon.abilities">
+                                <label>Nombre: {{ability.name}}</label>
+                                <br>
+                                <label>Descripcion: {{ability.description}}</label>
+                            </div>
+                    </div>
+                    <div *ngIf="pokemon.evolutionId" class="inputItems flexDirectionColumn" >
+                        <h5>Evoluciones</h5>
+                        <label>{{pokemonEvolucion.name}}</label>
+                        <label>Level: {{pokemonEvolucion.lvl}}</label>
+                        <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
+                        <label>
+                            <img src={{pokemonEvolucion.image}} width="100px" height="100px" alt="">
+                         </label>
+                     </div>
+                     <div class="d-flex justify-content-center mt-2 ">
+                        <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
+                        <button class="btn btn-primary w-50 btnActive" (click)="modificar(pokemon)">Update</button>
+                    </div> 
                 </div>
-                <div *ngIf="pokemon.evolutionId" class="inputItems flexDirectionColumn" >
-                   <h5>Evoluciones</h5>
-                   <label>{{pokemonEvolucion.name}}</label>
-                   <label>Level: {{pokemonEvolucion.lvl}}</label>
-                   <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
-                   <label>
-                       <img src={{pokemonEvolucion.image}} width="100px" height="100px" alt="">
-                    </label>
-                </div>
-                
-                <div class="d-flex justify-content-center mt-2 ">
-                    <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
-                    <button *ngIf="!existePokemon" class="btn btn-primary w-50 btnActive" (click)="altaPokemon()">Save</button>
-                    <button *ngIf="existePokemon" class="btn btn-primary w-50 btnActive" (click)="modificar(pokemon)">Update</button>
-                </div> 
+                <!-- Para alta -->
+                <form [formGroup]="formulario" (ngSubmit)="altaPokemon()" *ngIf="!existePokemon">
+                    <div class="inputItems flexDirectionColumn"> 
+                        <h5>Tipo</h5>
+                        <div class="input-group mb-2 d-flex justify-content-center">
+                            <input type="text" style="width: 100%;" formControlName="types" class="form-control" aria-describedby="typesHelp">
+                            <div id="typesHelp" class="form-text" *ngIf="formulario.get('types')?.hasError('required') && formulario.get('types')?.touched">
+                                El tipo es requerido 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputContainer">
+                        <label>Nombre</label>
+                        <div class="mt-2 mb-2">
+                            <input type="text" style="width: 80%;" formControlName="name" class="form-control" aria-describedby="nameHelp">
+                            <div id="nameHelp" class="form-text" *ngIf="formulario.get('name')?.hasError('required') && formulario.get('name')?.touched">
+                               El nombre es requerido 
+                            </div>
+                        </div>
+                        <label>Lvl</label>
+                        <div class="mt-2 mb-2">
+                            <input type="number" style="width: 40%;" min="1" formControlName="lvl" class="form-control" aria-describedby="lvlHelp">
+                            <div id="lvlHelp" class="form-text" *ngIf="formulario.get('lvl')?.hasError('required') && formulario.get('lvl')?.touched">
+                               El lvl es requerido 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-input-file">
+                        <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
+                        <label class="labelInputImg" for="inputImg">Subir Imagen</label>
+                    </div>
+                    <div class="inputItems flexDirectionColumn">  
+                        <h5 class="mt-2">Habilidades</h5>
+                        <div class="mt-2 mb-2" >
+                            <label>Nombre</label><input type="text" formControlName="abilityName" class="form-control" aria-describedby="abilityNameHelp">
+                            <div id="abilityNameHelp" class="form-text" *ngIf="formulario.get('abilityName')?.hasError('required') && formulario.get('abilityName')?.touched">
+                                El nombre es requerido 
+                             </div>
+                        </div>
+                        <div class="mt-2 mb-2">
+                            <label>Descripcion</label><input type="text" formControlName="abilityDescription" class="form-control" aria-describedby="abilityDescriptionHelp">
+                            <div id="abilityDescriptionHelp" class="form-text" *ngIf="formulario.get('abilityDescription')?.hasError('required') && formulario.get('abilityDescription')?.touched">
+                                La description es requerida 
+                             </div>
+                        </div>  
+                    </div>
+                    <div class="d-flex justify-content-center mt-2 ">
+                        <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
+                        <button class="btn btn-primary w-50 btnActive" type="submit" [disabled]="formulario.invalid">Save</button>
+                    </div> 
+                </form>
             </div>
         </div>
     </div>
 </div>
+
 <div class="popup" style="top:0; left:0;" *ngIf="eliminarTipo">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

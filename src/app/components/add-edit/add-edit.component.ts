@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 import { DatabaseService } from 'src/app/services/database.service';
@@ -14,25 +15,26 @@ export class AddEditComponent implements OnInit {
   imagenASubir:any;
   pokemon:any = [];
   tipoSeleccionado:any;
+  nombreAEditar:any;
   eliminarTipo:boolean = false;
   pokemonEvolucion:any = [];
   existePokemon:boolean = false;
-  pokemonNuevo:any = [{
-      types:[],
-      name:"",
-      lvl:0,
-      image:"",
-      evolutionId:0
-    }];
-    abilities:any=[{
-      name:"",
-      description:""
-    }];
-    
+  formulario:FormGroup;
   constructor(private router: Router, private afAuth: AngularFireAuth, 
     private apiPokemon:ApiPokemonService,private database:DatabaseService, 
-    private route:ActivatedRoute, private toast:ToastService) { 
-  }
+    private route:ActivatedRoute, private toast:ToastService, private fb:FormBuilder) { 
+      this.formulario = this.fb.group({
+        types:["",Validators.required],
+        name:["",Validators.required],
+        lvl:["",Validators.required],
+        abilityName:["",Validators.required],
+        abilityDescription:["",Validators.required]
+      });
+    }
+
+    aceptar(){
+      console.log(this.formulario.value.name);
+    }
 
   async ngOnInit() {
     if(this.route.snapshot.paramMap.get("id")){
@@ -104,14 +106,14 @@ export class AddEditComponent implements OnInit {
     let nuevoPokemon = {
       "pokemon":{
         id:this.apiPokemon.ultimoId++,
-        name:this.pokemonNuevo.name,
-        lvl:this.pokemonNuevo.lvl,
+        name:this.formulario.value.name ,
+        lvl:this.formulario.value.lvl,
         evolutionId:0,
         abilities:[{
-          name:this.abilities.name,
-          description:this.abilities.description
+          name:this.formulario.value.abilityName,
+          description:this.formulario.value.abilityDescription
         }],
-        type:[this.tipoSeleccionado],
+        type:[this.formulario.value.types],
         image:this.imagenASubir
       },
       "userId":this.database.userId
@@ -127,7 +129,7 @@ export class AddEditComponent implements OnInit {
     
     let pokemonEditado = {
       id:pokemon.id,
-      name:this.pokemonNuevo.name?this.pokemonNuevo.name:pokemon.name,
+      name:this.nombreAEditar?this.nombreAEditar:pokemon.name,
       lvl:pokemon.lvl,
       evolutionId:pokemon.evolutionId,
       abilities:this.pokemon.abilities,

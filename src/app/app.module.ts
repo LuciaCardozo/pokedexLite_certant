@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { AddEditComponent } from './components/add-edit/add-edit.component';
@@ -40,7 +40,8 @@ appId: "1:645397347517:web:7e5290e77b6530c9484bd4"
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     HttpClientModule,
-    ApiModule
+    ApiModule, 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
