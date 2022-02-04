@@ -8,15 +8,9 @@
             </div>
             <div class="card-body" >
                 <div class="inputContainer" *ngFor="let pok of lista" (click)="seleccionarPokemon(pok)">
-                    <input type="text" style="width: 30%;" placeholder={{pok.types}} disabled>
+                    <input type="text" style="width: 30%;" placeholder={{pok.type}} disabled>
                     <input type="text" style="width: 60%;" placeholder={{pok.name}} disabled>
                     <input type="number" style="width:10%;" placeholder={{pok.lvl}} disabled>
-                    <div >
-
-                    </div>
-                    <!-- <div>
-                    <input type="string" style="width:15%;"  disabled>
-                </div> -->
                 </div>
             </div>
             <div class="d-flex justify-content-end mt-2">
@@ -24,7 +18,4 @@
             </div>
         </div>
     </div>
-</div>
-<div *ngIf="pokemonSeleccionado"> 
-    <app-add-edit [pokemon]="pokemonSeleccionado"></app-add-edit>
 </div>

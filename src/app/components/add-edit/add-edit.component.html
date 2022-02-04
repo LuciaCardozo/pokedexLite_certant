@@ -7,72 +7,80 @@
                 Pokedex-Lite
             </div>
             <div class="card-body">
-                <div class="inputItems flexDirectionColumn ">
-                    <label>Tipo</label>
-                    <div *ngIf="pokemon" class="input-group mb-2 d-flex justify-content-center">
+                <div class="inputItems flexDirectionColumn">
+                    <h5>Tipo</h5>
+                    <div class="input-group mb-2 d-flex justify-content-center">
                         <input type="text" style="width: 30%;" [(ngModel)]="tipoSeleccionado">
-                        <div *ngIf="pokemon" class="input-group-append">
-                            <button class="btn btn-outline-danger" type="button">Eliminar</button>
+                        <div *ngIf="existePokemon" class="input-group-append">
+                            <button class="btn btn-outline-danger" type="button" (click)="addType(pokemon,tipoSeleccionado)">Agregar</button>
                           </div>
                     </div>
-                    <input *ngIf="!pokemon" type="text" style="width: 30%;" [(ngModel)]="pokemonNuevo.types">
-                    <label *ngIf="pokemon">Seleccione el tipo a editar:</label>
-                    <ul *ngIf="pokemon" class="ulSeleccion">
-                        <li (click)="tipoSeleccionado=type" *ngFor="let type of pokemon.types">{{type}}</li>
+                    <label *ngIf="existePokemon">Seleccione el tipo a editar:</label>
+                    <ul class="ulSeleccion">
+                        <li (click)="tipoSeleccionado=type" *ngFor="let type of pokemon.type">{{type}}
+                            <button class="btn btn-outline-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
+                        </li>
                     </ul>
                 </div>
                 <div class="inputContainer">
                     <label>Nombre</label>
                     <input type="text" style="width: 60%;" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="pokemonNuevo.name">
                     <label>Lvl</label>
-                    <input *ngIf="pokemon" type="number" style="width:15%;" placeholder="{{pokemon?pokemon.lvl:'Lvl'}}" disabled>
-                    <input *ngIf="!pokemon" type="number" style="width:15%;" placeholder="{{pokemon?pokemon.lvl:'Lvl'}}" [(ngModel)]="pokemonNuevo.lvl">
+                    <input *ngIf="existePokemon" type="number" style="width:15%;" placeholder="{{pokemon.lvl}}" disabled>
+                    <input *ngIf="!existePokemon" type="number" style="width:15%;" placeholder="Lvl" [(ngModel)]="pokemonNuevo.lvl">
                 </div>
                 <div class="custom-input-file">
                     <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
-                    <label *ngIf="pokemon" class="labelInputImg"><img *ngIf="pokemon" src={{pokemon.imgHd}} width="100px" height="100px" alt=""></label>
-                    <label *ngIf="!pokemon" class="labelInputImg" for="inputImg">Subir Imagen</label>
+                    <label *ngIf="existePokemon" class="labelInputImg" disabled><img src={{pokemon.image}} width="100px" height="100px" alt=""></label>
+                    <label *ngIf="!existePokemon" class="labelInputImg" for="inputImg">Subir Imagen</label>
                 </div>
                 <div class="inputItems flexDirectionColumn">  
-                    <label>Habilidades</label>
-                    <ul *ngIf="pokemon"> 
-                        <li *ngFor="let ability of pokemon.abilities">{{ability}}</li>
-                    </ul>
-                    <input class="text-center" *ngIf="!pokemon" type="text" placeholder="Habilidad" [(ngModel)]="pokemonNuevo.abilities">
-                </div>
-                <div>
-
-                </div>
-                <div class="inputItems flexDirectionColumn">
-                   <label>Evoluciones</label> 
-                    <input *ngIf="!pokemon" class="text-center m-1"  type="text" placeholder="Nombre" [(ngModel)]="evoluciones.name" >
-                    <input *ngIf="!pokemon" class="text-center m-1"  type="text" placeholder="Tipo" [(ngModel)]="evoluciones.types" >
-                    <input *ngIf="!pokemon" class="text-center m-1"  type="text" placeholder="min-level" [(ngModel)]="evoluciones.min_level">
-                    <input type="file" accept=".png,.jpg" id="inputImg" class="input-file m-1" >
-                    <label *ngIf="!pokemon" class="labelEvolution" for="inputImg">Subir Imagen</label>
-                   
-                    <div *ngIf="pokemon" class="d-flex justify-content-center align-items-start m-2" style="width: 100%; height: 35vh;">
-                        <div style=" width: 30%; height: 25%; text-align: center;"  *ngFor="let evo of pokemon.evoluciones">
-                            <div style="display: flex; justify-content: center; align-items: center;">  
-                                <div>
-                                    <div style="display: flex; justify-content: center; align-items: center;">
-                                        <img src="{{evo.img}}" style="max-width: 3rem;">
-                                    </div>
-                                </div>
-                            </div>
-                        <h5>{{evo.name}}</h5>
-                        <p >Evoluciona level: {{evo.min_level}}</p>
-                        <label class="labelTipo" *ngFor="let tipo of evo.types">{{tipo}}</label>
+                    <h5>Habilidades</h5>  
+                    <div *ngIf="existePokemon">
+                        <div *ngFor="let ability of pokemon.abilities">
+                            <label>Nombre: {{ability.name}}</label>
+                            <br>
+                            <label>Descripcion: {{ability.description}}</label>
                         </div>
+                        
+                    </div>
+                    <div *ngIf="!existePokemon">
+                        <input class="text-center m-1"  type="text" placeholder="Nombre" [(ngModel)]="abilities.name">
+                        <input class="text-center m-1"  type="text" placeholder="Descripcion" [(ngModel)]="abilities.description">
                     </div>
                 </div>
-               
-                <div class="d-flex justify-content-center mt-2 ">
-                    <button *ngIf="!pokemon" class="btn btn-danger w-50 btnActive" (click)="cancelarEdicion()" [routerLink]="['/home']">Cancelar</button>
-                    <a *ngIf="pokemon" class="btn btn-danger w-50 btnActive" href="http://localhost:4200/home" >Cancelar</a>
-                    <button class="btn btn-primary w-50 btnActive" (click)="altaPokemon($event)">Save</button>
+                <div *ngIf="pokemon.evolutionId" class="inputItems flexDirectionColumn" >
+                   <h5>Evoluciones</h5>
+                   <label>{{pokemonEvolucion.name}}</label>
+                   <label>Level: {{pokemonEvolucion.lvl}}</label>
+                   <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
+                   <label>
+                       <img src={{pokemonEvolucion.image}} width="100px" height="100px" alt="">
+                    </label>
                 </div>
+                
+                <div class="d-flex justify-content-center mt-2 ">
+                    <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
+                    <button *ngIf="!existePokemon" class="btn btn-primary w-50 btnActive" (click)="altaPokemon()">Save</button>
+                    <button *ngIf="existePokemon" class="btn btn-primary w-50 btnActive" (click)="modificar(pokemon)">Update</button>
+                </div> 
             </div>
+        </div>
+    </div>
+</div>
+<div class="popup" style="top:0; left:0;" *ngIf="eliminarTipo">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Pokedex-Lite</h5>
+        </div>
+        <div class="modal-body">
+            <p style="font-weight: bolder; font-size: 15px;">Queres eliminar este tipo?</p>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-success m-1" value="si" (click)="deleteType(pokemon,tipoSeleccionado)">Si</button>
+            <button type="button" class="btn btn-secondary m-1" value="no" (click)="cerrarPop()">No</button>
+        </div>
         </div>
     </div>
 </div>

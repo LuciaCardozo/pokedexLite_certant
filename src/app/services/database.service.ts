@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { SecurityService } from '../swaggerApi';
 const firebaseConfig = {
   apiKey: "AIzaSyDFS-2rJTcwby8d9K0PY6cw82haLpsfKOQ",
 authDomain: "scenic-setup-298622.firebaseapp.com",
@@ -18,14 +20,15 @@ firebase.initializeApp(firebaseConfig);
   providedIn: 'root'
 })
 export class DatabaseService {
-
+  private user: Observable<firebase.User | null>;
   public emailUsuarioLogeado: any;
+  public userId:any;
   public isLogged: any = false;
   public storageRef = firebase.app().storage().ref();
 
-  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) {
+  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth,private apiClient:SecurityService) {
     afAuth.authState.subscribe(user => this.isLogged = user);//en el caso de no estar logueado devuelve un null
-    // this.users = this.firestore.collection('users').valueChanges();
+    this.user = this.afAuth.authState;
   }
 
   async alta(coleccion: any, dato: any) {
@@ -41,6 +44,7 @@ export class DatabaseService {
   //LOGIN
   async onLogin(email: string, password: string) {
     try {
+      this.emailUsuarioLogeado = email;
       return await this.afAuth.signInWithEmailAndPassword(email, password);
     } catch (error) {
       console.log("Error on login", error);
@@ -67,6 +71,16 @@ export class DatabaseService {
     }
   }
 
+  async TraerPorId(coleccion:any,id:any){
+    try {
+      return await this.firestore.collection(coleccion).doc(id).snapshotChanges();
+    }
+    catch (error) {
+      alert(error);
+      return null;
+    }
+  }
+
   async subirImagen(nombre: string, img64: any) {
     try {
       console.log(img64);
@@ -76,5 +90,9 @@ export class DatabaseService {
       console.log("ERROR " + error);
       return null;
     }
+  }
+
+  getSwaggerCliente(cliente:any){
+    return this.apiClient.loginPOST(cliente,"body");
   }
 }

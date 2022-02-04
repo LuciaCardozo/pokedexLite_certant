@@ -1,0 +1,7 @@
+{
+    "/pokedex-api/*":{
+        "target":"https://testing.certant.com",
+        "secure":false,
+        "changeOrigin":true
+    }
+}

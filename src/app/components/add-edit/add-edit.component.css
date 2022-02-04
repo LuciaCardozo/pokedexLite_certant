@@ -85,3 +85,15 @@ color: #0275d8;
     margin-left: 2px;
     background-color: rgb(115, 236, 236);
 }
+
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+.popup{
+    position: absolute;
+    width: 99%;
+    height: 99%;
+    z-index: 999;
+    background-color: rgba(112, 22, 22, 0.274);
+}
