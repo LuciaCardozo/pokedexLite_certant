@@ -126,7 +126,6 @@ export class AddEditComponent implements OnInit {
   }
 
   modificar(pokemon:any){
-    
     let pokemonEditado = {
       id:pokemon.id,
       name:this.nombreAEditar?this.nombreAEditar:pokemon.name,
