@@ -38,4 +38,9 @@ export class HomeComponent implements OnInit {
     this.afAuth.signOut();
     this.router.navigate(['/login']);
   }
+
+  IrAAgregar(){
+    this.http.pokemonSeleccionado = null;
+    this.router.navigate(['/addEdit']);
+  }
 }

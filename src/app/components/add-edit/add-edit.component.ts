@@ -32,12 +32,11 @@ export class AddEditComponent implements OnInit {
   }
 
   async ngOnInit() {
-    if(this.apiPokemon.pokemonSeleccionado){
+    this.pokemon = this.apiPokemon.pokemonSeleccionado;
+    if(this.pokemon){
       this.existePokemon = true;
-      this.pokemon = this.apiPokemon.pokemonSeleccionado;
       this.pokemonEvolucion = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==this.pokemon.evolutionId);
     }else{
-      this.pokemon = "";
       this.existePokemon = false;
     }
   }
@@ -70,6 +69,10 @@ export class AddEditComponent implements OnInit {
     this.afAuth.signOut();
     this.router.navigate(['/login']);
   }
+  
+  volverAlMenu() {
+    this.router.navigate(['/home']);
+  }
 
   cargarImagen(event:any) {
     console.log(event.target.files);
@@ -82,10 +85,6 @@ export class AddEditComponent implements OnInit {
         //console.log(urlImg); 
       });
     }
-  }
-
-  volverAlMenu() {
-    this.router.navigate(['/home']);
   }
 
   altaPokemon() {
