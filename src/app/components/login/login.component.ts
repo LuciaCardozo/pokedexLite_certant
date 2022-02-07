@@ -16,14 +16,16 @@ export class LoginComponent implements OnInit {
   };
   isLogged = false;
 
-  constructor(private database: DatabaseService, private router: Router, private toastService: ToastService) { 
-  }
+  constructor(private database: DatabaseService, private router: Router, private toastService: ToastService) { }
 
-  async ngOnInit() { }
+  ngOnInit() { }
 
   loginConValidacion() {
-    if(this.usuario.username == "master" || this.usuario.username == "trainer" && this.usuario.password == "password"){
+    if(this.usuario.username && this.usuario.password){
       try{
+        this.database.getSwaggerCliente(this.usuario).subscribe((res)=>{
+          this.database.userId = res.userId;
+        })
         this.database.isLogged = true;
         setTimeout(() => {        
           this.router.navigate(['/home']);
@@ -32,7 +34,8 @@ export class LoginComponent implements OnInit {
       } catch (error){
         this.toastService.show("Error login", {classname:'bg-warning', "delay":"2000"});
       }
-    }else if(this.usuario.username == '' || this.usuario.password==''){
+    }
+    else if(this.usuario.username == '' || this.usuario.password==''){
       this.toastService.show("Por favor complete todos los campos", {classname:'bg-warning', "delay":"2000"});
     }else{
       this.toastService.show("El usuario no existe en la base de datos", {classname:'bg-danger',"delay":"2000"});
@@ -45,9 +48,6 @@ export class LoginComponent implements OnInit {
       username:email,
       password:password,
     }
-    this.database.getSwaggerCliente(this.usuario).subscribe((res)=>{
-      this.database.userId = res.userId;
-    })
   }
 
 }
