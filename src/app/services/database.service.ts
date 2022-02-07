@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
-import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { SecurityService } from '../swaggerApi';
 const firebaseConfig = {
@@ -26,7 +25,7 @@ export class DatabaseService {
   public isLogged: any = false;
   public storageRef = firebase.app().storage().ref();
 
-  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth,private apiClient:SecurityService) {
+  constructor(private afAuth: AngularFireAuth,private apiClient:SecurityService) {
     afAuth.authState.subscribe(user => this.isLogged = user);//en el caso de no estar logueado devuelve un null
     this.user = this.afAuth.authState;
   }

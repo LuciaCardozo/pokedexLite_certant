@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 import { DatabaseService } from 'src/app/services/database.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -23,7 +22,7 @@ export class AddEditComponent implements OnInit {
   formulario: FormGroup;
 
   constructor(private database: DatabaseService, private afAuth: AngularFireAuth,private apiPokemon: ApiPokemonService,
-    private router: Router,private route: ActivatedRoute, private toast: ToastService, private fb: FormBuilder) {
+    private router: Router, private toast: ToastService, private fb: FormBuilder) {
     this.formulario = this.fb.group({
       types: ["", Validators.required],
       name: ["", Validators.required],
@@ -36,11 +35,7 @@ export class AddEditComponent implements OnInit {
     if(this.apiPokemon.pokemonSeleccionado){
       this.existePokemon = true;
       this.pokemon = this.apiPokemon.pokemonSeleccionado;
-      this.apiPokemon.listaPokemones.forEach((pokemon:any) => {
-        if (this.pokemon.evolutionId == pokemon.id) {
-          this.pokemonEvolucion = pokemon;
-        }
-      });
+      this.pokemonEvolucion = this.apiPokemon.listaPokemones.find((poke:any)=>poke.evolutionId==this.pokemon.Id);
     }else{
       this.existePokemon = false;
     }

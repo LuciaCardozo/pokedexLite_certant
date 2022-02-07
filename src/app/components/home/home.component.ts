@@ -1,9 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 import { DatabaseService } from 'src/app/services/database.service';
-import { PokemonService } from 'src/app/swaggerApi/api/pokemon.service'
 
 @Component({
   selector: 'app-home',
