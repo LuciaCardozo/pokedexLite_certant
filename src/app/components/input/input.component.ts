@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class InputComponent implements OnInit {
   @Input() condicion:any;
-  @Input() formControlName:any;
+  @Input() formName:any;
   @Input() nombreLabel:any;
   @Input() mensaje:any;
   @Input() formulario:any;

@@ -14,6 +14,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from './swaggerApi';
 import { InputComponent } from './components/input/input.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDFS-2rJTcwby8d9K0PY6cw82haLpsfKOQ",
@@ -33,7 +34,8 @@ appId: "1:645397347517:web:7e5290e77b6530c9484bd4"
     AddEditComponent,
     ToastComponent,
     ErrorComponent,
-    InputComponent
+    InputComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

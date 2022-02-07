@@ -7,7 +7,7 @@
                 Pokedex-Lite
             </div>
             <div class="card-body">
-                <!-- Para Modificar -->
+                <!-- Para modificar -->
                 <div *ngIf="existePokemon">
                     <div class="inputItems flexDirectionColumn">
                         <h5>Tipo</h5>
@@ -56,22 +56,25 @@
                         <button class="btn btn-primary w-50 btnActive" (click)="modificar(pokemon)">Update</button>
                     </div> 
                 </div>
-                <!-- Para alta -->
+                <app-modal [condicion]="eliminarTipo" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
+                    (seAcepto)="deleteType(pokemon,tipoSeleccionado)" (seRechazo)="cerrarPop()"
+                ></app-modal>
+                <!-- Para agregar -->
                 <form [formGroup]="formulario" (ngSubmit)="altaPokemon()" *ngIf="!existePokemon">
                     <div class="inputItems flexDirectionColumn"> 
                         <h5>Tipo</h5>
                         <app-input [condicion]="formulario.get('types')?.hasError('required') && formulario.get('types')?.touched"
-                        [formControlName]="'types'" [mensaje]="'El tipo es requerido'" 
+                        [formName]="'types'" [mensaje]="'El tipo es requerido'" 
                         [tipoInput]="'text'" [formulario]="formulario"></app-input>
                     </div>
                     <div class="inputContainer">
                         <label>Nombre</label>
                         <app-input [condicion]="formulario.get('name')?.hasError('required') && formulario.get('name')?.touched"
-                            [formControlName]="'name'" [mensaje]="'El nombre es requerido'" 
+                            [formName]="'name'" [mensaje]="'El nombre es requerido'" 
                             [tipoInput]="'text'" [formulario]="formulario"></app-input>
                         <label>Lvl</label>
                         <app-input [condicion]="formulario.get('lvl')?.hasError('required') && formulario.get('lvl')?.touched"
-                            [formControlName]="'lvl'" [mensaje]="'El lvl es requerido'" 
+                            [formName]="'lvl'" [mensaje]="'El lvl es requerido'" 
                             [tipoInput]="'number'" [formulario]="formulario"></app-input>
                     </div>
                     <div class="custom-input-file">
@@ -81,10 +84,10 @@
                     <div class="inputItems flexDirectionColumn">  
                         <h5 class="mt-2">Habilidades</h5>
                         <app-input [condicion]="formulario.get('abilityName')?.hasError('required') && formulario.get('abilityName')?.touched"
-                            [formControlName]="'abilityName'" [nombreLabel]="'Nombre:'" [tipoInput]="'text'"
+                            [formName]="'abilityName'" [nombreLabel]="'Nombre:'" [tipoInput]="'text'"
                             [mensaje]="'El nombre es requerido'" [formulario]="formulario"></app-input>
                         <app-input [condicion]="formulario.get('abilityDescription')?.hasError('required') && formulario.get('abilityDescription')?.touched"
-                            [formControlName]="'abilityDescription'" [nombreLabel]="'Descripcion:'" [tipoInput]="'text'"
+                            [formName]="'abilityDescription'" [nombreLabel]="'Descripcion:'" [tipoInput]="'text'"
                             [mensaje]="'La descripcion es requerida'" [formulario]="formulario"></app-input>
                     </div>
                     <div class="d-flex justify-content-center mt-2 ">
@@ -93,22 +96,6 @@
                     </div> 
                 </form>
             </div>
-        </div>
-    </div>
-</div>
-<div class="popup" style="top:0; left:0;" *ngIf="eliminarTipo">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Pokedex-Lite</h5>
-        </div>
-        <div class="modal-body">
-            <p style="font-weight: bolder; font-size: 15px;">Queres eliminar este tipo?</p>
-        </div>
-        <div class="text-center">
-            <button type="button" class="btn btn-success m-1" value="si" (click)="deleteType(pokemon,tipoSeleccionado)">Si</button>
-            <button type="button" class="btn btn-secondary m-1" value="no" (click)="cerrarPop()">No</button>
-        </div>
         </div>
     </div>
 </div>

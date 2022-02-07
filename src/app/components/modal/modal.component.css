@@ -1,0 +1,7 @@
+.popup{
+    position: absolute;
+    width: 99%;
+    height: 99%;
+    z-index: 999;
+    background-color: rgba(112, 22, 22, 0.274);
+}

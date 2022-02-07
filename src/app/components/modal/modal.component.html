@@ -1,0 +1,16 @@
+    <div class="popup" style="top:0; left:0;" *ngIf="condicion">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{title}}</h5>
+            </div>
+            <div class="modal-body">
+                <p style="font-weight: bolder; font-size: 15px;">{{mensaje}}</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-success m-1" value="si" (click)="aceptar()">Si</button>
+                <button type="button" class="btn btn-secondary m-1" data-dismiss="modal" value="no" (click)="rechazar()">No</button>
+            </div>
+            </div>
+        </div>
+    </div>

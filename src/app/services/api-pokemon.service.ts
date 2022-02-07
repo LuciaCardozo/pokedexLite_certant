@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { PokemonService } from '../swaggerApi';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiPokemonService {
   ultimoId:number=10;
   constructor(private http: HttpClient, private swaggerApi:PokemonService) { }
