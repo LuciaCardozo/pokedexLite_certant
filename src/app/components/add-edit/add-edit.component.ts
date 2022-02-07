@@ -37,6 +37,7 @@ export class AddEditComponent implements OnInit {
       this.pokemon = this.apiPokemon.pokemonSeleccionado;
       this.pokemonEvolucion = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==this.pokemon.evolutionId);
     }else{
+      this.pokemon = "";
       this.existePokemon = false;
     }
   }
