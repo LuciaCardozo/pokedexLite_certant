@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
+import { DatabaseService } from 'src/app/services/database.service';
 import { PokemonService } from 'src/app/swaggerApi/api/pokemon.service'
 
 @Component({
@@ -10,26 +11,28 @@ import { PokemonService } from 'src/app/swaggerApi/api/pokemon.service'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userId = this.route.snapshot.paramMap.get("id");
   lista: any = [];
   pokemonSeleccionado: any;
   constructor(private router: Router, private afAuth: AngularFireAuth, private http: ApiPokemonService,
-    private route:ActivatedRoute) {
+    private database:DatabaseService) {
   }
 
   async ngOnInit() {
-    this.http.getSwagger(this.route.snapshot.paramMap.get("id")).subscribe((data)=>{
+    this.http.getSwagger(this.database.userId).subscribe((data)=>{
      data.forEach((poke)=>{
       if(poke != null){
         this.lista.push(poke);
       }
      });
     });
+    this.http.listaPokemones = this.lista;
+    //console.log(this.http.listaPokemones)
   }
 
   public seleccionarPokemon(pokemon: any) {
     this.pokemonSeleccionado = pokemon;
-    this.router.navigate(['/addEdit',this.pokemonSeleccionado.id]);
+    this.http.pokemonSeleccionado = pokemon
+    this.router.navigate(['/addEdit']);
   }
 
   onLogout() {

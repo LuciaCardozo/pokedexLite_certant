@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       try{
         this.database.isLogged = true;
         setTimeout(() => {        
-          this.router.navigate(['/home',this.database.userId]);
+          this.router.navigate(['/home']);
         }, 200);
         this.toastService.show("Successfully user", {classname:'bg-success', "delay":"2000"});
       } catch (error){

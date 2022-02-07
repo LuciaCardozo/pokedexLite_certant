@@ -5,8 +5,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  @Input() title:any;
-  @Input() mensaje:any;
+  @Input() title:string = "";
+  @Input() mensaje:string = "";
   @Input() condicion:any;
   @Output() seAcepto:EventEmitter<any> = new EventEmitter<any>();
   @Output() seRechazo:EventEmitter<any> = new EventEmitter<any>();

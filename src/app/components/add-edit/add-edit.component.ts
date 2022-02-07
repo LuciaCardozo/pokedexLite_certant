@@ -14,58 +14,49 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class AddEditComponent implements OnInit {
   imagenASubir: any;
-  pokemon: any = [];
-  tipoSeleccionado: any;
-  nombreAEditar: any;
+  pokemon:any = [];
+  tipoSeleccionado: string = "";
+  nombreAEditar: string = "";
   eliminarTipo: boolean = false;
-  pokemonEvolucion: any = [];
+  pokemonEvolucion:any = [];
   existePokemon: boolean = false;
   formulario: FormGroup;
 
-  constructor(private router: Router, private afAuth: AngularFireAuth,
-    private apiPokemon: ApiPokemonService, private database: DatabaseService,
-    private route: ActivatedRoute, private toast: ToastService, private fb: FormBuilder, private modalService: NgbModal) {
+  constructor(private database: DatabaseService, private afAuth: AngularFireAuth,private apiPokemon: ApiPokemonService,
+    private router: Router,private route: ActivatedRoute, private toast: ToastService, private fb: FormBuilder) {
     this.formulario = this.fb.group({
       types: ["", Validators.required],
       name: ["", Validators.required],
       lvl: ["", Validators.required],
       abilityName: ["", Validators.required],
-      abilityDescription: ["", Validators.required]
-    });
+      abilityDescription: ["", Validators.required] });
   }
 
   async ngOnInit() {
-    if (this.route.snapshot.paramMap.get("id")) {
+    if(this.apiPokemon.pokemonSeleccionado){
       this.existePokemon = true;
-      this.apiPokemon.getSwagger(this.database.userId).subscribe((data) => {
-        data.forEach((poke) => {
-          if (poke != null) {
-            if (poke.id == Number(this.route.snapshot.paramMap.get("id"))) {
-              this.pokemon = poke;
-            }
-            if (this.pokemon.evolutionId == poke.id) {
-              this.pokemonEvolucion = poke;
-            }
-          }
-        });
+      this.pokemon = this.apiPokemon.pokemonSeleccionado;
+      this.apiPokemon.listaPokemones.forEach((pokemon:any) => {
+        if (this.pokemon.evolutionId == pokemon.id) {
+          this.pokemonEvolucion = pokemon;
+        }
       });
-    } else {
+    }else{
       this.existePokemon = false;
     }
   }
 
-  deleteType(pokemon: any, type: any) {
+  deleteType(pokemon: any, type: string) {
     let index = pokemon.type.indexOf(type);
     if (index > -1) {
       pokemon.type.splice(index, 1);
       //console.log(pokemon);
     }
-
     this.eliminarTipo = false;
     this.tipoSeleccionado = "";
   }
 
-  addType(pokemon: any, type: any) {
+  addType(pokemon: any, type: string) {
     if (this.tipoSeleccionado != null) {
       pokemon['type'].push(type);
       this.tipoSeleccionado = "";
@@ -73,7 +64,6 @@ export class AddEditComponent implements OnInit {
       this.toast.show("Completa el campo", { classname: 'bg-danger', "delay": "2000" });
     }
   }
-
 
   cerrarPop() {
     this.tipoSeleccionado = "";
@@ -85,7 +75,7 @@ export class AddEditComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  cargarImagen(event: any) {
+  cargarImagen(event:any) {
     console.log(event.target.files);
     let archivos = event.target.files
     let reader = new FileReader();
@@ -99,7 +89,7 @@ export class AddEditComponent implements OnInit {
   }
 
   volverAlMenu() {
-    this.router.navigate(['/home', this.database.userId]);
+    this.router.navigate(['/home']);
   }
 
   altaPokemon() {
@@ -120,7 +110,7 @@ export class AddEditComponent implements OnInit {
     };
     this.apiPokemon.postSwagger(nuevoPokemon).then((data) => {
       console.log(data);
-    })
+    });
     console.log(nuevoPokemon);
     this.volverAlMenu();
   }

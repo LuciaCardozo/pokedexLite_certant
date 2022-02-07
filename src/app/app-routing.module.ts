@@ -10,10 +10,9 @@ import { ErrorComponent } from './components/error/error.component';
 const routes: Routes = [
   {path:"",redirectTo:"login",pathMatch:"full"},
   {path:"login",component:LoginComponent},
-  {path:"home",component:HomeComponent,canActivate:[AuthGuard]},
-  {path:"home/:id",component:HomeComponent,canActivate:[AuthGuard]},//,canActivate:[AuthGuard]
+  {path:"home",component:HomeComponent,canActivate:[AuthGuard]},//,canActivate:[AuthGuard]
   {path:"addEdit",component:AddEditComponent,canActivate:[AuthGuard]},
-  {path:"addEdit/:id",component:AddEditComponent,canActivate:[AuthGuard]},
+  {path:"addEdit",component:AddEditComponent,canActivate:[AuthGuard]},
   {path:'**',component:ErrorComponent}
 ];
 

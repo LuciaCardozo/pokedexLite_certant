@@ -8,7 +8,9 @@ import { PokemonService } from '../swaggerApi';
 
 export class ApiPokemonService {
   ultimoId:number=10;
-  constructor(private http: HttpClient, private swaggerApi:PokemonService) { }
+  pokemonSeleccionado:any;
+  listaPokemones:any = [];
+  constructor(private swaggerApi:PokemonService) { }
 
   ngOnInit(): void {
   }
