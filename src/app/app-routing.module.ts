@@ -12,7 +12,6 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"home",component:HomeComponent,canActivate:[AuthGuard]},//,canActivate:[AuthGuard]
   {path:"addEdit",component:AddEditComponent,canActivate:[AuthGuard]},
-  {path:"addEdit",component:AddEditComponent,canActivate:[AuthGuard]},
   {path:'**',component:ErrorComponent}
 ];
 
