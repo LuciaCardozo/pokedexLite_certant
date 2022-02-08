@@ -15,7 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from './swaggerApi';
 import { InputComponent } from './components/input/input.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { PokedexComponent } from './components/pokedex/pokedex.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDFS-2rJTcwby8d9K0PY6cw82haLpsfKOQ",
@@ -36,8 +35,7 @@ appId: "1:645397347517:web:7e5290e77b6530c9484bd4"
     ToastComponent,
     ErrorComponent,
     InputComponent,
-    ModalComponent,
-    PokedexComponent
+    ModalComponent
   ],
   imports: [
     BrowserModule,
