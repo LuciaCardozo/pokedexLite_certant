@@ -1,17 +1,17 @@
 <div class="contenedor">
     <div>
         <p class="mb-5"><small>User not logged in system</small></p>
-        <div class="card" style="height: 60%;">
-            <div class="card-header text-center" style="color: #0275d8;">
+        <div class="card">
+            <div class="card-header text-center">
             <h5>Pokedex-Lite</h5> 
             </div>
-            <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+            <div class="card-body">
                 <div class="inputContainer">
                     <input type="email" class="form-control mt-2" [(ngModel)]="usuario.username" placeholder="username">
                     <input type="password" class="form-control mt-2" [(ngModel)]="usuario.password" placeholder="password">
-                    <div class=" d-flex justify-content-between">
-                        <a class="mt-3"(click)="autoCompletarUsuario('trainer','password')"><img class="imgAutoCompletar"  src="https://img.freepik.com/vector-gratis/cute-cat-gaming-auriculares-consola-cartoon-icon-illustration-concepto-icono-juego-animal-aislado-estilo-dibujos-animados-plana_138676-1739.jpg?size=338&ext=jpg" alt="">Thiago</a>
-                        <a class="mt-3"(click)="autoCompletarUsuario('master','password')"><img class="imgAutoCompletar"  src="https://img.freepik.com/vector-gratis/cute-cat-gaming-icon-ilustracion-concepto-icono-juego-animal-aislado-estilo-plano-dibujos-animados_138676-1271.jpg?size=338&ext=jpg" alt="">Lucía</a>
+                    <div class="d-flex justify-content-between">
+                        <a class="mt-3"(click)="autoCompletarUsuario('trainer','password')"><img class="imgAutoCompletar" src="../../../assets/bulbasaur.png" alt="">Thiago</a>
+                        <a class="mt-3"(click)="autoCompletarUsuario('master','password')"><img class="imgAutoCompletar" src="../../../assets/charmander.png" alt="">Lucía</a>
                     </div>
                     <div class="d-flex justify-content-end mt-5">
                         <button class="btn btn-primary btn-block btnActive" (click)="loginConValidacion()">Login</button>

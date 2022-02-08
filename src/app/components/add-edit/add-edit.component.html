@@ -12,7 +12,7 @@
                     <div class="inputItems flexDirectionColumn">
                         <h5>Tipo</h5>
                         <div class="input-group mb-2 d-flex justify-content-center">
-                            <input type="text" style="width: 30%;" class="form-control" [(ngModel)]="tipoSeleccionado">
+                            <input type="text" class="form-control" [(ngModel)]="tipoSeleccionado">
                             <div class="input-group-append" >
                                 <button class="btn btn-outline-danger" type="button" (click)="addType(pokemon,tipoSeleccionado)">Agregar</button>
                             </div>
@@ -25,10 +25,8 @@
                         </ul>
                     </div>
                     <div class="inputContainer">
-                        <label>Nombre</label>
-                        <input type="text" style="width: 60%;" class="form-control" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="nombreAEditar">
-                        <label>Lvl</label>
-                        <input type="number" style="width:15%;" class="form-control" placeholder="{{pokemon.lvl}}" disabled>
+                        <label>Nombre</label><input type="text" class="form-control" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="nombreAEditar">
+                        <label>Lvl</label><input class="form-control" placeholder="{{pokemon.lvl}}" disabled>
                     </div>
                     <div class="custom-input-file">
                         <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">

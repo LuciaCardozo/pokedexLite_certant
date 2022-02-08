@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       try{
         this.database.getSwaggerCliente(this.usuario).subscribe((res)=>{
           this.database.userId = res.userId;
-        })
+        });
         this.database.isLogged = true;
         setTimeout(() => {        
           this.router.navigate(['/home']);

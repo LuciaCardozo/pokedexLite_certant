@@ -4,4 +4,11 @@
     height: 99%;
     z-index: 999;
     background-color: rgba(112, 22, 22, 0.274);
+    top:0; 
+    left:0;
+}
+
+.modal-body>p{
+    font-weight: bolder;
+    font-size: 15px;
 }

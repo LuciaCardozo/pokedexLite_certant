@@ -1,8 +1,3 @@
-.cardBodyLogin{
-    margin-top: 120px;
-    padding: 50px;
-}
-
 input::placeholder,p,input {
     color: #0275d8; 
     text-align: center;
@@ -26,5 +21,16 @@ input::placeholder,p,input {
 a{
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.card{
+    height: 60%;
+    color: #0275d8;
+}
+
+.card-body{
+    display: flex; 
+    justify-content: center; 
     align-items: center;
 }
