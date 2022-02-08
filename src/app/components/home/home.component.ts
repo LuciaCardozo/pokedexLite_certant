@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Pokemon } from 'src/app/class/pokemon';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  lista: any = [];
+  lista: Pokemon[] = [];
   constructor(private router: Router, private apiPS: ApiPokemonService) {
   }
 
@@ -16,15 +17,15 @@ export class HomeComponent implements OnInit {
     this.apiPS.getSwagger(this.apiPS.userId).subscribe({
       next: (res) => {
         this.lista = res.filter((poke)=>poke != null)
+        this.apiPS.listaPokemones = this.lista;
       },
       error: (error) =>{
         console.log("No se pudo cargar los pokemones, error:",error);
       }
     });
-    this.apiPS.listaPokemones = this.lista;
   }
 
-  public seleccionarPokemon(pokemon: any) {
+  public seleccionarPokemon(pokemon: Pokemon) {
     this.apiPS.pokemonSeleccionado = pokemon
     this.router.navigate(['/addEdit']);
   }

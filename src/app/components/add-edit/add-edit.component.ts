@@ -43,7 +43,6 @@ export class AddEditComponent implements OnInit {
     let index = pokemon.type.indexOf(type);
     if (index > -1) {
       pokemon.type.splice(index, 1);
-      //console.log(pokemon);
     }
     this.eliminarTipo = false;
     this.tipoSeleccionado = "";
@@ -81,7 +80,6 @@ export class AddEditComponent implements OnInit {
   cargarImagen(event:any) {
     let archivoCapturado = event.target.files[0];
     this.imagenASubir = "assets/"+archivoCapturado.name;
-    //console.log( this.imagenASubir);
   }
 
   altaPokemon() {
@@ -100,10 +98,7 @@ export class AddEditComponent implements OnInit {
       },
       "userId": this.apiPokemon.userId
     };
-    this.apiPokemon.postSwagger(nuevoPokemon).then((data) => {
-      console.log(data);
-    });
-    console.log(nuevoPokemon);
+    this.apiPokemon.postSwagger(nuevoPokemon).then();
     this.volverAlMenu();
   }
 
@@ -117,10 +112,7 @@ export class AddEditComponent implements OnInit {
       type: pokemon.type,
       image: pokemon.image
     };
-    console.log(pokemonEditado);
-    this.apiPokemon.putSwagger(pokemonEditado).then((res) => {
-      console.log(res);
-    });
+    this.apiPokemon.putSwagger(pokemonEditado).then();
     this.volverAlMenu();
   }
 

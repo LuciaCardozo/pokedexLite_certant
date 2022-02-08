@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
     username: '',
     password: ''
   };
-  isLogged = false;
 
   constructor(private database: ApiPokemonService, private router: Router, private toastService: ToastService) { }
 
@@ -38,7 +37,6 @@ export class LoginComponent implements OnInit {
   }
   
   autoCompletarUsuario(email:string,password:string) {
-    this.database.emailUsuarioLogeado = email;
     this.usuario = {
       username:email,
       password:password,

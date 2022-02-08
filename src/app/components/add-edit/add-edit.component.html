@@ -7,7 +7,7 @@
                 <h5>Pokedex-Lite</h5> 
             </div>
             <div class="card-body">
-                <!-- Para modificar -->
+                 <!-- Para modificar  -->
                 <div *ngIf="existePokemon">
                     <div class="inputItems flexDirectionColumn">
                         <h5>Tipo</h5>
@@ -50,7 +50,7 @@
                 </div>
                 <app-modal [condicion]="eliminarTipo" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
                     (seAcepto)="deleteType(pokemon,tipoSeleccionado)" (seRechazo)="cerrarPop()"></app-modal>
-                <!-- Para agregar -->
+                 <!-- Para agregar  -->
                 <form [formGroup]="formulario" (ngSubmit)="altaPokemon()" *ngIf="!existePokemon">
                     <div class="inputItems flexDirectionColumn"> 
                         <h5>Tipo</h5>
@@ -94,3 +94,9 @@
         </div>
     </div>
 </div>
+<!-- <app-pokedex 
+[img]=pokemon.image
+[name]=pokemon.name
+[lvl]=pokemon.lvl
+[type]=pokemon.type
+></app-pokedex> -->
