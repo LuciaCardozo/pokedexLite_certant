@@ -9,24 +9,22 @@ import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 })
 export class HomeComponent implements OnInit {
   lista: any = [];
-  pokemonSeleccionado: any;
   constructor(private router: Router, private apiPS: ApiPokemonService) {
   }
 
   async ngOnInit() {
-    this.apiPS.getSwagger(this.apiPS.userId).subscribe((data)=>{
-     data.forEach((poke)=>{
-      if(poke != null){
-        this.lista.push(poke);
+    this.apiPS.getSwagger(this.apiPS.userId).subscribe({
+      next: (res) => {
+        this.lista = res.filter((poke)=>poke != null)
+      },
+      error: (error) =>{
+        console.log("No se pudo cargar los pokemones, error:",error);
       }
-     });
     });
     this.apiPS.listaPokemones = this.lista;
-    //console.log(this.http.listaPokemones)
   }
 
   public seleccionarPokemon(pokemon: any) {
-    this.pokemonSeleccionado = pokemon;
     this.apiPS.pokemonSeleccionado = pokemon
     this.router.navigate(['/addEdit']);
   }

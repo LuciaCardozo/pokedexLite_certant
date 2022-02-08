@@ -25,12 +25,12 @@ export class LoginComponent implements OnInit {
       this.toastService.show("Por favor llene los campos", {classname:'bg-warning', "delay":"1500"});
     } else {
       this.database.getSwaggerCliente(this.usuario).subscribe({
-        next: (res)=>{
+        next: (res) => {
           this.database.userId = res.userId;
           this.router.navigate(['/home']);
           this.toastService.show("Bienvenid@", {classname:'bg-success', "delay":"1500"});
         },
-        error: ()=>{
+        error: () => {
           this.toastService.show("El usuario no existe en la base de datos", {classname:'bg-danger', "delay":"1500"});
         }
       });
