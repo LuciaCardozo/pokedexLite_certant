@@ -20,24 +20,23 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() { }
 
-   loginConValidacion() {
-      try{
-        if(this.usuario.username == "" && this.usuario.password == ""){
-          this.toastService.show("Por favor llene los campos", {classname:'bg-warning', "delay":"1500"});
-        } else {
-          this.database.getSwaggerCliente(this.usuario).subscribe((res)=>{ 
-            this.database.userId = res.userId;
-            setTimeout(() => {        
-              this.router.navigate(['/home']);
-            }, 200);
-            this.toastService.show("Successfully user", {classname:'bg-success', "delay":"1500"});
-          },error=>{
-            this.toastService.show("El usuario no existe en la base de datos", {classname:'bg-danger', "delay":"1500"});
-          })
+  loginConValidacion() {
+    if(this.usuario.username == "" && this.usuario.password == "") {
+      this.toastService.show("Por favor llene los campos", {classname:'bg-warning', "delay":"1500"});
+    } else {
+      this.database.getSwaggerCliente(this.usuario).subscribe({
+        next: (res)=>{
+          this.database.userId = res.userId;
+          setTimeout(() => {        
+          this.router.navigate(['/home']);
+          }, 200);
+          this.toastService.show("Bienvenid@", {classname:'bg-success', "delay":"1500"});
+        },
+        error: ()=>{
+          this.toastService.show("El usuario no existe en la base de datos", {classname:'bg-danger', "delay":"1500"});
         }
-      } catch (error){
-        this.toastService.show("Error login", {classname:'bg-warning', "delay":"1000"});
-      }
+      });
+    }
   }
   
   autoCompletarUsuario(email:string,password:string) {

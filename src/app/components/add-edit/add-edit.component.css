@@ -74,6 +74,7 @@ color: #0275d8;
     align-items: center;
     user-select: none;
 }
+
 .contenedor{
     flex-wrap: wrap;
 }
@@ -87,10 +88,19 @@ color: #0275d8;
     width: 100vw;
     height: 100vh;
 }
+
 .popup{
     position: absolute;
     width: 99%;
     height: 99%;
     z-index: 999;
     background-color: rgba(112, 22, 22, 0.274);
+}
+
+.card-body{
+    max-height: 60vh;
+    overflow: scroll;
+}
+.card-body::-webkit-scrollbar{
+    display: none;
 }
