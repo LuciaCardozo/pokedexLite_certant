@@ -71,7 +71,6 @@ export class AddEditComponent implements OnInit {
   }
 
   onLogout() {
-    this.apiPokemon.isLogged = false;
     this.router.navigate(['/login']);
   }
   

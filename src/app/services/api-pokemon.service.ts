@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PokemonService, SecurityService } from '../swaggerApi';
+import { DefaultService, PokemonService, SecurityService } from '../swaggerApi';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,6 @@ export class ApiPokemonService {
   listaPokemones:any = [];
   emailUsuarioLogeado: any;
   userId:any;
-  isLogged: any = false;
 
   constructor(private swaggerApi:PokemonService, private apiClient:SecurityService) { }
 

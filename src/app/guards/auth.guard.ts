@@ -12,7 +12,7 @@ constructor(private router:Router, private toastService:ToastService, private au
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.authSvb.isLogged){
+      if(this.authSvb.userId){
       return true;
     }
     this.router.navigateByUrl('/login');

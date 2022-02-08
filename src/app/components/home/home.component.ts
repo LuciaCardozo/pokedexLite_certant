@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
   }
 
   onLogout() {
-    this.apiPS.isLogged = false;
     this.router.navigate(['/login']);
   }
 
