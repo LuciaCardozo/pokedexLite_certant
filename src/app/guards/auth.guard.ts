@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DatabaseService } from '../services/database.service';
+import { ApiPokemonService } from '../services/api-pokemon.service';
 import { ToastService } from '../services/toast.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-constructor(private authSvb:DatabaseService, private router:Router, private toastService:ToastService){}
+constructor(private router:Router, private toastService:ToastService, private authSvb:ApiPokemonService){}
   
   canActivate(
     route: ActivatedRouteSnapshot,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseService } from 'src/app/services/database.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/services/toast.service';
+import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 
 
 @Component({
@@ -16,12 +16,12 @@ export class LoginComponent implements OnInit {
   };
   isLogged = false;
 
-  constructor(private database: DatabaseService, private router: Router, private toastService: ToastService) { }
+  constructor(private database: ApiPokemonService, private router: Router, private toastService: ToastService) { }
 
   ngOnInit() { }
 
   loginConValidacion() {
-    if(this.usuario.username && this.usuario.password){
+    if(this.usuario.username == "master" || this.usuario.username == "trainer" && this.usuario.password == "password"){
       try{
         this.database.getSwaggerCliente(this.usuario).subscribe((res)=>{
           this.database.userId = res.userId;

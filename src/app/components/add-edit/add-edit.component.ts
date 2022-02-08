@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
-import { DatabaseService } from 'src/app/services/database.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -21,7 +19,7 @@ export class AddEditComponent implements OnInit {
   existePokemon: boolean = false;
   formulario: FormGroup;
 
-  constructor(private database: DatabaseService, private afAuth: AngularFireAuth,private apiPokemon: ApiPokemonService,
+  constructor(private apiPokemon: ApiPokemonService,
     private router: Router, private toast: ToastService, private fb: FormBuilder) {
     this.formulario = this.fb.group({
       types: ["", Validators.required],
@@ -73,7 +71,7 @@ export class AddEditComponent implements OnInit {
   }
 
   onLogout() {
-    this.afAuth.signOut();
+    this.apiPokemon.isLogged = false;
     this.router.navigate(['/login']);
   }
   
@@ -82,16 +80,9 @@ export class AddEditComponent implements OnInit {
   }
 
   cargarImagen(event:any) {
-    console.log(event.target.files);
-    let archivos = event.target.files
-    let reader = new FileReader();
-    reader.readAsDataURL(archivos[0]);
-    reader.onloadend = () => {
-      this.database.subirImagen("img" + " " + Date.now(), reader.result).then(urlImg => {
-        this.imagenASubir = urlImg;
-        //console.log(urlImg); 
-      });
-    }
+    let archivoCapturado = event.target.files[0];
+    this.imagenASubir = "assets/"+archivoCapturado.name;
+    //console.log( this.imagenASubir);
   }
 
   altaPokemon() {
@@ -99,7 +90,7 @@ export class AddEditComponent implements OnInit {
       "pokemon": {
         id: this.apiPokemon.ultimoId++,
         name: this.formulario.value.name,
-        lvl: this.formulario.value.lvl,
+        lvl: Number(this.formulario.value.lvl),
         evolutionId: 0,
         abilities: [{
           name: this.formulario.value.abilityName,
@@ -108,7 +99,7 @@ export class AddEditComponent implements OnInit {
         type: [this.formulario.value.types],
         image: this.imagenASubir
       },
-      "userId": this.database.userId
+      "userId": this.apiPokemon.userId
     };
     this.apiPokemon.postSwagger(nuevoPokemon).then((data) => {
       console.log(data);
