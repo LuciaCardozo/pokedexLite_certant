@@ -53,7 +53,9 @@ export class AddEditComponent implements OnInit {
 
   addType(pokemon: any, type: string) {
     if (this.tipoSeleccionado != "") {
-      let existePokemon = pokemon.type.indexOf(type);
+      let pokemonToUpperCase = pokemon.type.map((tipo:any)=>tipo.toUpperCase());
+      let typeToUpperCase = type.toUpperCase();
+      let existePokemon = pokemonToUpperCase.indexOf(typeToUpperCase);
       if(existePokemon > -1){
         this.toast.show("Ya existe este tipo", { classname: 'bg-warning', "delay": "2000" });
       }else{
