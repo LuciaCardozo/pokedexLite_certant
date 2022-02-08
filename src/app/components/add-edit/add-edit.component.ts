@@ -53,8 +53,13 @@ export class AddEditComponent implements OnInit {
 
   addType(pokemon: any, type: string) {
     if (this.tipoSeleccionado != "") {
-      pokemon['type'].push(type);
-      this.tipoSeleccionado = "";
+      let existePokemon = pokemon.type.indexOf(type);
+      if(existePokemon > -1){
+        this.toast.show("Ya existe este tipo", { classname: 'bg-warning', "delay": "2000" });
+      }else{
+        pokemon['type'].push(type);
+        this.tipoSeleccionado = "";
+      }
     } else {
       this.toast.show("Completa el campo", { classname: 'bg-danger', "delay": "2000" });
     }
