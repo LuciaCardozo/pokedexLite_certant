@@ -27,9 +27,7 @@ export class LoginComponent implements OnInit {
       this.database.getSwaggerCliente(this.usuario).subscribe({
         next: (res)=>{
           this.database.userId = res.userId;
-                 
           this.router.navigate(['/home']);
-          
           this.toastService.show("Bienvenid@", {classname:'bg-success', "delay":"1500"});
         },
         error: ()=>{
