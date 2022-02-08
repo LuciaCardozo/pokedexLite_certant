@@ -52,7 +52,7 @@ export class AddEditComponent implements OnInit {
   }
 
   addType(pokemon: any, type: string) {
-    if (this.tipoSeleccionado != null) {
+    if (this.tipoSeleccionado != "") {
       pokemon['type'].push(type);
       this.tipoSeleccionado = "";
     } else {
