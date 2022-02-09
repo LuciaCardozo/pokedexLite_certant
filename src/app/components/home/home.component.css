@@ -1,58 +1,18 @@
-body{
-    background: linear-gradient(336deg,rgb(240, 227, 108),rgb(236, 114, 114));
-}.inputContainer>input{
-    text-align: center; 
-    border:1px solid rgb(162, 159, 159);
-}
-
-.inputContainer{
-    border:1px solid rgb(162, 159, 159);
-    /* cambie en aling items center, agregue 50%*/
-    border-radius: 50px 10px 50px 10px;
-    padding: 0.5rem;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-
-.card{
-    max-height: 60vh;
-    overflow: scroll;
-}
-
-.card::-webkit-scrollbar{
-    display: none;
+.divContainer{   
+    background: linear-gradient(336deg,rgb(240, 227, 108),rgb(253, 171, 171));
 }
 
 .btnNew{
-    
     width: 70px;
     height: 70px;
     border-radius: 50px;
     text-align: center; 
-    border:1px solid rgb(255, 0, 0);
+    border-style: dashed;
+    border-color: red;
     background-color: transparent;
 }
-
 .btnNew:active{
     transform: scale(0.95);
-}
-
-input::placeholder,.card-header,.btnNew,p{
-    color: #0275d8; 
-}
-
-/* JON */
-.divLabel{
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bolder;
-}
-
-.divContainer{   
-    background: linear-gradient(336deg,rgb(240, 227, 108),rgb(253, 171, 171));
 }
 
 .divPokemon{
@@ -66,6 +26,7 @@ input::placeholder,.card-header,.btnNew,p{
     min-height: 100vh;
     margin: 1rem;
 }
+
 .pokemonCard{
     border-radius: 10%;
     background-color: #dc3545;
@@ -79,20 +40,16 @@ input::placeholder,.card-header,.btnNew,p{
     color: white;
 }
 
-.divContainerPokemon{
+.divContainerPokemon,.divBotonAgregar{
     display: flex; 
     justify-content: center; 
     align-items: center;
 }
+
 .btnSalir{
     position: absolute;
     right: 1rem;
     top:1rem;
-}
-
-.divBotonAgregar{
-    display: flex;
-    justify-content: center;
 }
 
 .divBoton{
@@ -106,63 +63,4 @@ input::placeholder,.card-header,.btnNew,p{
     text-shadow: -2px -2px 4px #000000; 
     color: rgb(238, 210, 49); 
     text-decoration: underline;
-}
-
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
-
-html, body{
-  height: 100%;
-  font-weight: 800;
-}
-
-body{
-  background: #030321;
-  font-family: Arial;
-}
-
-svg {
-    display: block;
-    font: 10.5em 'Montserrat';
-    width: 860px;
-    height: 200px;
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-.text-copy {
-    fill: none;
-    stroke: white;
-    stroke-dasharray: 6% 29%;
-    stroke-width: 5px;
-    stroke-dashoffset: 0%;
-    animation: stroke-offset 5.5s infinite linear;
-}
-
-.text-copy:nth-child(1){
-	stroke: #4D163D;
-	animation-delay: -1;
-}
-
-.text-copy:nth-child(2){
-	stroke: #840037;
-	animation-delay: -2s;
-}
-
-.text-copy:nth-child(3){
-	stroke: #BD0034;
-	animation-delay: -3s;
-}
-
-.text-copy:nth-child(4){
-	stroke: #BD0034;
-	animation-delay: -4s;
-}
-
-.text-copy:nth-child(5){
-	stroke: #FDB731;
-	animation-delay: -5s;
-}
-
-@keyframes stroke-offset{
-	100% {stroke-dashoffset: -35%;}
 }
