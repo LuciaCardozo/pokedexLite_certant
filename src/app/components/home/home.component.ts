@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Pokemon } from 'src/app/class/pokemon';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 
@@ -10,7 +11,10 @@ import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 })
 export class HomeComponent implements OnInit {
   lista: Pokemon[] = [];
-  constructor(private router: Router, private apiPS: ApiPokemonService) {
+  username:string = "";
+  constructor(private router: Router, private apiPS: ApiPokemonService, private carousel:NgbCarouselConfig) {
+    this.carousel.interval = 2500;
+    this.username = this.apiPS.emailUsuarioLogeado;
   }
 
   async ngOnInit() {

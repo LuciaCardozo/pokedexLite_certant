@@ -1,26 +1,31 @@
-<div class="contenedor">
+<div class="divContainer">
     <button class="btn btn-danger btnSalir" (click)="onLogout()">Salir</button>
-    <div>
-        <p class="text-center mb-5"><small>User logged in system</small></p>
-        <div class="card m-3">
-            <div class="card-header text-center">
-                <h5>Pokedex-Lite</h5> 
-            </div>
-            <div class="card-body" >
-                <div class="inputContainer" *ngFor="let pok of lista" (click)="seleccionarPokemon(pok)">
-                    <img src={{pok.image}} width="80px" height="80px" alt="">
-                    <div class="flex-wrap">
-                        <label> Nombre: {{pok.name}}</label><br>
-                        <label> Tipos: {{pok.type}}</label><br>
-                        <label> Lvl: {{pok.lvl}}</label>
-                    </div>
-                    <!-- <input type="text" style="width: 30%;" placeholder={{pok.type}} disabled>
-                    <input type="text" style="width: 60%;" placeholder={{pok.name}} disabled>
-                    <input type="number" style="width:10%;" placeholder={{pok.lvl}} disabled> -->
+    <svg viewBox="0 0 960 300">
+        <symbol id="s-text">
+            <text text-anchor="middle" x="50%" y="80%">Pokedex-Lite</text>
+        </symbol>
+        <g class = "g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+        </g>
+    </svg>
+    <div class="divBotonAgregar">
+        <div class="divBoton">
+            <button class="btnNew" (click)="IrAAgregar()">➕</button>
+        </div>
+    </div>
+    <div class="divContainerPokemon">
+        <div class="divPokemon">
+            <div class="pokemonCard" (click)="seleccionarPokemon(pok)" *ngFor="let pok of lista">
+                <div>
+                    <h3>{{pok.name}}</h3>
+                    <img width="200px" src={{pok.image}} alt="img-pokemon"><br>
+                    <label>Level: {{pok.lvl}}</label><br>
+                    <label>Tipos: {{pok.type}}</label>
                 </div>
-            </div>
-            <div class="d-flex justify-content-end">
-                <button class="btnNew" (click)="IrAAgregar()">➕</button>
             </div>
         </div>
     </div>

@@ -21,11 +21,12 @@ export class LoginComponent implements OnInit {
 
   loginConValidacion() {
     if(this.usuario.username == "" && this.usuario.password == "") {
-      this.toastService.show("Por favor llene los campos", {classname:'bg-warning', "delay":"1500"});
+      this.toastService.show("Por favor llene los campos", {classname:'bg-warning', "delay":"1000"});
     } else {
       this.database.getSwaggerCliente(this.usuario).subscribe({
         next: (res) => {
           this.database.userId = res.userId;
+          this.database.emailUsuarioLogeado = res.username;
           this.router.navigate(['/home']);
           this.toastService.show("Bienvenid@", {classname:'bg-success', "delay":"1500"});
         },
@@ -36,9 +37,9 @@ export class LoginComponent implements OnInit {
     }
   }
   
-  autoCompletarUsuario(email:string,password:string) {
+  autoCompletarUsuario(username:string,password:string) {
     this.usuario = {
-      username:email,
+      username:username,
       password:password,
     }
   }

@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(336deg,rgb(240, 227, 108),rgb(253, 171, 171));
 }
 
 .flexCenterCenter{
