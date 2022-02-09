@@ -26,9 +26,8 @@ export class LoginComponent implements OnInit {
       this.database.getSwaggerCliente(this.usuario).subscribe({
         next: (res) => {
           this.database.userId = res.userId;
-          this.database.emailUsuarioLogeado = res.username;
           this.router.navigate(['/home']);
-          this.toastService.show("Bienvenid@", {classname:'bg-success', "delay":"1500"});
+          this.toastService.show("Bienvenid@ "+res.username, {classname:'bg-success', "delay":"1500"});
         },
         error: () => {
           this.toastService.show("El usuario no existe en la base de datos", {classname:'bg-danger', "delay":"1500"});

@@ -1,10 +1,11 @@
 .divContainer{   
+    height: 100vh;
     background: linear-gradient(336deg,rgb(240, 227, 108),rgb(253, 171, 171));
 }
 
 .btnNew{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50px;
     text-align: center; 
     border-style: dashed;
@@ -21,10 +22,15 @@
     border-radius: 10px;
     display: grid;
     gap: 1rem;
-    grid-template-columns:  repeat(auto-fill,minmax(15rem,1fr));
-    grid-auto-rows: 25rem;
-    min-height: 100vh;
+    grid-template-columns: repeat(auto-fill,minmax(15rem,1fr));
+    grid-auto-rows: 23rem;
     margin: 1rem;
+    max-height: 55vh;
+    overflow: scroll;
+}
+
+.divPokemon::-webkit-scrollbar{
+    display: none;
 }
 
 .pokemonCard{
