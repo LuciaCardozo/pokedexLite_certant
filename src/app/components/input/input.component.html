@@ -1,5 +1,5 @@
 <div class="mt-2 mb-2" [formGroup]="formulario">
-    <label>{{nombreLabel}}</label><input type="{{tipoInput}}" formControlName={{formName}} class="form-control" aria-describedby="abilityNameHelp">
+    <h5>{{nombreLabel}}</h5><input type="{{tipoInput}}" formControlName={{formName}} class="form-control" aria-describedby="abilityNameHelp">
     <div id="abilityNameHelp" class="form-text" *ngIf="condicion">
         {{mensaje}}
      </div>

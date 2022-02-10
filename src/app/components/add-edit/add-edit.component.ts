@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { Pokemon } from 'src/app/swaggerApi';
 
 @Component({
   selector: 'app-add-edit',
@@ -52,8 +51,8 @@ export class AddEditComponent implements OnInit {
     this.tipoSeleccionado = "";
   }
 
-  addType(pokemon: any, type: string) {
-    if (this.tipoSeleccionado != "") {
+  addType(pokemon: any, type:any) {
+    if (type != "") {
       let pokemonToUpperCase = pokemon.type.map((tipo:any)=>tipo.toUpperCase());
       let typeToUpperCase = type.toUpperCase();
       let existePokemon = pokemonToUpperCase.indexOf(typeToUpperCase);
@@ -61,7 +60,6 @@ export class AddEditComponent implements OnInit {
         this.toast.show("Ya existe este tipo", { classname: 'bg-warning', "delay": "2000" });
       }else{
         pokemon['type'].push(type);
-        this.tipoSeleccionado = "";
       }
     } else {
       this.toast.show("Completa el campo", { classname: 'bg-danger', "delay": "2000" });

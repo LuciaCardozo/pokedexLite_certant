@@ -1,114 +1,102 @@
-<div class="contenedor">
+<div class="divContainer">
     <button class="btn btn-danger btnSalir btnActive" (click)="onLogout()">Salir</button>
-    <div>
-        <p class="text-center mb-5"><small>User logged in system</small></p>
-        <div class="card m-3">
-            <div class="card-header text-center">
-                <h5>Pokedex-Lite</h5> 
-            </div>
-            <div class="card-body">
-                 <!-- Para modificar  -->
-                <div *ngIf="existePokemon">
-                    <div class="inputItems flexDirectionColumn">
-                        <h5>Tipo</h5>
-                        <div class="input-group mb-2 d-flex justify-content-center">
-                            <input type="text" class="form-control" [(ngModel)]="tipoSeleccionado">
-                            <div class="input-group-append" >
-                                <button class="btn btn-outline-danger" type="button" (click)="addType(pokemon,tipoSeleccionado)">Agregar</button>
-                            </div>
-                        </div>
-                        <label >Seleccione el tipo a editar:</label>
-                        <ul class="ulSeleccion">
-                            <li (click)="tipoSeleccionado=type" *ngFor="let type of pokemon.type">{{type}}
-                                <button class="btn btn-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="inputContainer">
-                        <label>Nombre</label><input type="text" class="form-control" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="nombreAEditar">
-                        <label>Lvl</label><input class="form-control" placeholder="{{pokemon.lvl}}" disabled>
-                    </div>
-                    <div class="custom-input-file">
-                        <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
-                        <label class="labelInputImg" disabled><img src={{pokemon.image}} width="100px" height="100px" alt=""></label>
-                    </div>
-                    <div class="inputItems flexDirectionColumn">  
-                        <h5 class="mt-2">Habilidades</h5>
-                        <div *ngFor="let ability of pokemon.abilities">
-                            <label>Nombre: {{ability.name}}</label>
-                            <br>
-                            <label>Descripcion: {{ability.description}}</label>
-                        </div>
-                    </div>
-                    <div *ngIf="pokemon.evolutionId" class="inputItems flexDirectionColumn" >
-                        <h5>Evoluciones</h5>
-                        <Label>Id de Evolucion: {{pokemon.evolutionId}}</Label>
-                        <div class="inputItems flexDirectionColumn" *ngIf="pokemonEvolucion">
-                            <label>{{pokemonEvolucion.name}}</label>
-                            <label>Level: {{pokemonEvolucion.lvl}}</label>
-                            <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
-                            <label><img src={{pokemonEvolucion.image}} width="100px" height="100px" alt=""></label>
-                        </div>
-                        <button class="btn btn-danger" (click)="eliminarEvolucion=true" type="button">🗑️</button>
-                     </div> 
-                     <div class="inputItems flexDirectionColumn" *ngIf="!pokemon.evolutionId">
-                        <h5>Evoluciones</h5>
-                        <label>Id de Evolucion</label>
-                        <input type="number" placeholder="Id de evolucion" width="50" [(ngModel)]="evolucionNueva">
-                        <button class="btn btn-warning" (click)="agregarIdEvolucion(pokemon,evolucionNueva)">Agregar</button>
-                     </div>
-                </div>
-                <app-modal [condicion]="eliminarTipo" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
-                    (seAcepto)="deleteType(pokemon,tipoSeleccionado)" (seRechazo)="cerrarPop()"></app-modal>
-                <app-modal [condicion]="eliminarEvolucion" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar esta evolucion?'"
-                    (seAcepto)="eliminarIdEvolucion(pokemon)" (seRechazo)="cerrarPop()"></app-modal>
-                 <!-- Para agregar  -->
+    <div *ngIf="!existePokemon">
+        <app-title-decoration [title]="'New pokemon'"></app-title-decoration>
+        <div class="divPokemon">
+            <div class="pokemonCard">
                 <form [formGroup]="formulario" (ngSubmit)="altaPokemon()" *ngIf="!existePokemon">
-                    <div class="inputItems flexDirectionColumn"> 
-                        <h5>Tipo</h5>
-                        <app-input [condicion]="formulario.get('types')?.hasError('required') && formulario.get('types')?.touched"
-                        [formName]="'types'" [mensaje]="'El tipo es requerido'" 
-                        [tipoInput]="'text'" [formulario]="formulario"></app-input>
-                    </div>
-                    <div class="inputContainer">
-                        <label>Nombre</label>
-                        <app-input [condicion]="formulario.get('name')?.hasError('required') && formulario.get('name')?.touched"
-                            [formName]="'name'" [mensaje]="'El nombre es requerido'" 
-                            [tipoInput]="'text'" [formulario]="formulario"></app-input>
-                        <label>Lvl</label>
-                        <app-input [condicion]="formulario.get('lvl')?.hasError('required') && formulario.get('lvl')?.touched"
-                            [formName]="'lvl'" [mensaje]="'El lvl es requerido'" 
-                            [tipoInput]="'number'" [formulario]="formulario"></app-input>
-                    </div>
                     <div class="custom-input-file">
                         <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
                         <label class="labelInputImg" for="inputImg">Subir Imagen</label>
                     </div>
-                    <div class="inputItems flexDirectionColumn">  
-                        <h5 class="mt-2">Habilidades</h5>
+                    <div class="inputContainerAlta">
+                        <app-input [nombreLabel]="'Nombre'" [condicion]="formulario.get('name')?.hasError('required') && formulario.get('name')?.touched"
+                            [formName]="'name'" [mensaje]="'El nombre es requerido'" 
+                            [tipoInput]="'text'" [formulario]="formulario"></app-input>
+                        <app-input [nombreLabel]="'Lvl'" [condicion]="formulario.get('lvl')?.hasError('required') && formulario.get('lvl')?.touched"
+                            [formName]="'lvl'" [mensaje]="'El lvl es requerido'" 
+                            [tipoInput]="'number'" [formulario]="formulario"></app-input>
+                    </div>
+                    <div class="inputContainerAlta "> 
+                        <app-input [nombreLabel]="'Tipo'" [condicion]="formulario.get('types')?.hasError('required') && formulario.get('types')?.touched"
+                        [formName]="'types'" [mensaje]="'El tipo es requerido'" 
+                        [tipoInput]="'text'" [formulario]="formulario"></app-input>
+                        <app-input [condicion]="formulario.get('idEvolution')?.hasError('required') && formulario.get('idEvolution')?.touched"
+                            [formName]="'idEvolution'" [nombreLabel]="'Id de evolucion'" [tipoInput]="'number'"
+                            [mensaje]="'El id de evolucion es requerido'" [formulario]="formulario"></app-input>
+                    </div>
+                    <h4 class="inputContainerAlta mt-2">Habilidades</h4>
+                    <div class="inputContainerAlta ">  
                         <app-input [condicion]="formulario.get('abilityName')?.hasError('required') && formulario.get('abilityName')?.touched"
-                            [formName]="'abilityName'" [nombreLabel]="'Nombre:'" [tipoInput]="'text'"
+                            [formName]="'abilityName'" [nombreLabel]="'Nombre'" [tipoInput]="'text'"
                             [mensaje]="'El nombre es requerido'" [formulario]="formulario"></app-input>
                         <app-input [condicion]="formulario.get('abilityDescription')?.hasError('required') && formulario.get('abilityDescription')?.touched"
-                            [formName]="'abilityDescription'" [nombreLabel]="'Descripcion:'" [tipoInput]="'text'"
+                            [formName]="'abilityDescription'" [nombreLabel]="'Descripcion'" [tipoInput]="'text'"
                             [mensaje]="'La descripcion es requerida'" [formulario]="formulario"></app-input>
                     </div>
-                    <div class="labelEvolution flexDirectionColumn">
-                        <h6>Id de Evolucion</h6>
-                        <app-input [condicion]="formulario.get('idEvolution')?.hasError('required') && formulario.get('idEvolution')?.touched"
-                            [formName]="'idEvolution'" [nombreLabel]="'Descripcion:'" [tipoInput]="'number'"
-                            [mensaje]="'El id de evolucion es requerido'" [formulario]="formulario"></app-input>
-                    </div> 
-                    <div *ngIf="!existePokemon" class="d-flex justify-content-center mt-2 form-group">
+                    <div class="d-flex justify-content-center mt-2 form-group">
                         <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
                         <button class="btn btn-primary w-50 btnActive" type="submit" [disabled]="formulario.invalid">Save</button>
                     </div>
                 </form>
             </div>
-            <div *ngIf="existePokemon" class="d-flex justify-content-center mt-2 ">
-                <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
-                <button class="btn btn-primary w-50 btnActive" (click)="modificar(pokemon)">Update</button>
-            </div>
         </div>
+    </div>
+    <div *ngIf="existePokemon">
+        <app-title-decoration [title]="'Edit Pokemon'"></app-title-decoration>
+        <div class="divPokemon">
+            <div class="pokemonCard">
+                <div class="inputNombreEdit">
+                    <h5>Nombre</h5><input type="text" class="form-control" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="nombreAEditar">
+                </div>
+                <div class="custom-input-file">
+                    <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
+                    <label class="labelInputImg" disabled><img src={{pokemon.image}} width="100px" height="100px" alt=""></label>
+                </div><hr>
+                <div class="inputItemsEdit">
+                    <h5>Level: {{pokemon.lvl}}</h5>
+                </div><hr>
+                <div class="inputItemsEdit flexDirectionColumn">  
+                    <h5 class="mt-2">Habilidades</h5>
+                    <div class="divHabilidades" *ngFor="let ability of pokemon.abilities">
+                        <label>Nombre: {{ability.name}}</label>
+                        <label>Descripcion: {{ability.description}}</label>
+                    </div>
+                </div><hr>
+                <div class="inputItemsEdit flexDirectionColumn">
+                    <app-input-con-boton [titulo]="'Tipo'" [tipoInput]="'text'"
+                    (seAcepto)="addType(pokemon,$event)" [nombreBoton]="'Agregar'"></app-input-con-boton>
+                    <label >Seleccione el tipo a editar:</label>
+                    <ul class="ulSeleccionTipo">
+                        <li (click)="tipoSeleccionado=type" *ngFor="let type of pokemon.type">{{type}}
+                            <button class="btn btn-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
+                        </li>
+                    </ul>
+                </div><hr>
+                <div *ngIf="pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn" >
+                    <h5>Evoluciones</h5>
+                    <Label>Id de Evolucion: {{pokemon.evolutionId}}</Label>
+                    <div class="divDetalleEvolucion flexDirectionColumn " *ngIf="pokemonEvolucion">
+                        <label>{{pokemonEvolucion.name}}</label>
+                        <label>Level: {{pokemonEvolucion.lvl}}</label>
+                        <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
+                        <label><img src={{pokemonEvolucion.image}} width="100px" height="100px" alt=""></label>
+                    </div>
+                    <button class="btn btn-danger m-2" (click)="eliminarEvolucion=true" type="button">🗑️</button>
+                </div> 
+                <div *ngIf="!pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn">
+                    <app-input-con-boton [titulo]="'Evoluciones'" [subTitulo]="'Id de Evolucion'" [tipoInput]="'number'"
+                    (seAcepto)="agregarIdEvolucion(pokemon,$event)" [nombreBoton]="'Agregar'"></app-input-con-boton>
+                </div><hr>
+                <div class="d-flex justify-content-center mt-2 form-group">
+                    <button class="btn btn-danger w-50" (click)="volverAlMenu()">Volver</button>
+                    <button class="btn btn-primary w-50" (click)="modificar(pokemon)">Update</button>
+                </div>
+                <app-modal [condicion]="eliminarTipo" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
+                    (seAcepto)="deleteType(pokemon,tipoSeleccionado)" (seRechazo)="cerrarPop()"></app-modal>
+                <app-modal [condicion]="eliminarEvolucion" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar esta evolucion?'"
+                    (seAcepto)="eliminarIdEvolucion(pokemon)" (seRechazo)="cerrarPop()"></app-modal>
+            </div>
+        </div> 
     </div>
 </div>

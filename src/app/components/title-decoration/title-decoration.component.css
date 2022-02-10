@@ -2,7 +2,7 @@
   
 svg {
     display: block;
-    font: 9rem 'Montserrat';
+    font: 8rem 'Montserrat';
     width: 860px;
     height: 200px;
     max-width: 100%;
@@ -15,32 +15,32 @@ svg {
     stroke-dasharray: 6% 29%;
     stroke-width: 5px;
     stroke-dashoffset: 0%;
-    animation: stroke-offset 5.5s infinite linear;
+    animation: stroke-offset 3s infinite linear;
 }
 
 .text-copy:nth-child(1){
 	stroke: #4D163D;
-	animation-delay: -1;
+	animation-delay: -0.1s;
 }
 
 .text-copy:nth-child(2){
 	stroke: #840037;
-	animation-delay: -2s;
+	animation-delay: -0.6s;
 }
 
 .text-copy:nth-child(3){
 	stroke: #BD0034;
-	animation-delay: -3s;
+	animation-delay: -1.2s;
 }
 
 .text-copy:nth-child(4){
 	stroke: #BD0034;
-	animation-delay: -4s;
+	animation-delay: -2.4s;
 }
 
 .text-copy:nth-child(5){
 	stroke: #FDB731;
-	animation-delay: -5s;
+	animation-delay: -4.8s;
 }
 
 @keyframes stroke-offset{
