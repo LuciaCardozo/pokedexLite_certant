@@ -126,8 +126,12 @@ export class AddEditComponent implements OnInit {
   }
 
   agregarIdEvolucion(pokemon:any,evolucion:number) {
-    pokemon.evolutionId = evolucion;
-    this.pokemonEvolucion = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==evolucion);
+    if(evolucion>0) {
+      pokemon.evolutionId = evolucion;
+      this.pokemonEvolucion = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==evolucion);
+    } else {
+      this.toast.show("Solo se acepta un valor positivo", { classname: 'bg-warning', "delay": "2000" });
+    }
   }
 }
 

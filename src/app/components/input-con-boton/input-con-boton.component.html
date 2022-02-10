@@ -1,7 +1,7 @@
 <h5>{{titulo}}</h5>
 <label>{{subTitulo}}</label>
 <div class="input-group mb-2 d-flex justify-content-center">
-    <input type="{{tipoInput}}" class="form-control" [(ngModel)]="variableInput">
+    <input type="{{tipoInput}}" min="1" class="form-control" [(ngModel)]="variableInput">
     <div class="input-group-append" >
         <button class="btn btn-outline-danger" type="button" (click)="aceptar()">{{nombreBoton}}</button>
     </div>
