@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Pokemon } from 'src/app/swaggerApi';
 
 @Component({
   selector: 'app-add-edit',
@@ -15,13 +16,16 @@ export class AddEditComponent implements OnInit {
   tipoSeleccionado: string = "";
   nombreAEditar: string = "";
   eliminarTipo: boolean = false;
+  eliminarEvolucion:boolean = false;
   pokemonEvolucion:any = [];
   existePokemon: boolean = false;
   formulario: FormGroup;
+  evolucionNueva:number = 0;
 
   constructor(private apiPokemon: ApiPokemonService,
     private router: Router, private toast: ToastService, private fb: FormBuilder) {
     this.formulario = this.fb.group({
+      idEvolution: ["",Validators.required],
       types: ["", Validators.required],
       name: ["", Validators.required],
       lvl: ["", Validators.required],
@@ -67,6 +71,7 @@ export class AddEditComponent implements OnInit {
   cerrarPop() {
     this.tipoSeleccionado = "";
     this.eliminarTipo = false;
+    this.eliminarEvolucion =false
   }
 
   onLogout() {
@@ -88,7 +93,7 @@ export class AddEditComponent implements OnInit {
         id: this.apiPokemon.ultimoId++,
         name: this.formulario.value.name,
         lvl: Number(this.formulario.value.lvl),
-        evolutionId: 0,
+        evolutionId: this.formulario.value.idEvolution,
         abilities: [{
           name: this.formulario.value.abilityName,
           description: this.formulario.value.abilityDescription
@@ -116,5 +121,15 @@ export class AddEditComponent implements OnInit {
     this.volverAlMenu();
   }
 
+  eliminarIdEvolucion(pokemon:any){
+    pokemon.evolutionId = 0;
+    this.evolucionNueva = 0;
+    this.eliminarEvolucion = false;
+  }
+
+  agregarIdEvolucion(pokemon:any,evolucion:number) {
+    pokemon.evolutionId = evolucion;
+    this.pokemonEvolucion = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==evolucion);
+  }
 }
 

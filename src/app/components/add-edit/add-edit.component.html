@@ -20,7 +20,7 @@
                         <label >Seleccione el tipo a editar:</label>
                         <ul class="ulSeleccion">
                             <li (click)="tipoSeleccionado=type" *ngFor="let type of pokemon.type">{{type}}
-                                <button class="btn btn-outline-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
+                                <button class="btn btn-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
                             </li>
                         </ul>
                     </div>
@@ -34,22 +34,34 @@
                     </div>
                     <div class="inputItems flexDirectionColumn">  
                         <h5 class="mt-2">Habilidades</h5>
-                            <div *ngFor="let ability of pokemon.abilities">
-                                <label>Nombre: {{ability.name}}</label>
-                                <br>
-                                <label>Descripcion: {{ability.description}}</label>
-                            </div>
+                        <div *ngFor="let ability of pokemon.abilities">
+                            <label>Nombre: {{ability.name}}</label>
+                            <br>
+                            <label>Descripcion: {{ability.description}}</label>
+                        </div>
                     </div>
                     <div *ngIf="pokemon.evolutionId" class="inputItems flexDirectionColumn" >
                         <h5>Evoluciones</h5>
-                        <label>{{pokemonEvolucion.name}}</label>
-                        <label>Level: {{pokemonEvolucion.lvl}}</label>
-                        <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
-                        <label><img src={{pokemonEvolucion.image}} width="100px" height="100px" alt=""></label>
+                        <Label>Id de Evolucion: {{pokemon.evolutionId}}</Label>
+                        <div class="inputItems flexDirectionColumn" *ngIf="pokemonEvolucion">
+                            <label>{{pokemonEvolucion.name}}</label>
+                            <label>Level: {{pokemonEvolucion.lvl}}</label>
+                            <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
+                            <label><img src={{pokemonEvolucion.image}} width="100px" height="100px" alt=""></label>
+                        </div>
+                        <button class="btn btn-danger" (click)="eliminarEvolucion=true" type="button">🗑️</button>
                      </div> 
+                     <div class="inputItems flexDirectionColumn" *ngIf="!pokemon.evolutionId">
+                        <h5>Evoluciones</h5>
+                        <label>Id de Evolucion</label>
+                        <input type="number" placeholder="Id de evolucion" width="50" [(ngModel)]="evolucionNueva">
+                        <button class="btn btn-warning" (click)="agregarIdEvolucion(pokemon,evolucionNueva)">Agregar</button>
+                     </div>
                 </div>
                 <app-modal [condicion]="eliminarTipo" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
                     (seAcepto)="deleteType(pokemon,tipoSeleccionado)" (seRechazo)="cerrarPop()"></app-modal>
+                <app-modal [condicion]="eliminarEvolucion" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar esta evolucion?'"
+                    (seAcepto)="eliminarIdEvolucion(pokemon)" (seRechazo)="cerrarPop()"></app-modal>
                  <!-- Para agregar  -->
                 <form [formGroup]="formulario" (ngSubmit)="altaPokemon()" *ngIf="!existePokemon">
                     <div class="inputItems flexDirectionColumn"> 
@@ -81,12 +93,18 @@
                             [formName]="'abilityDescription'" [nombreLabel]="'Descripcion:'" [tipoInput]="'text'"
                             [mensaje]="'La descripcion es requerida'" [formulario]="formulario"></app-input>
                     </div>
+                    <div class="labelEvolution flexDirectionColumn">
+                        <h6>Id de Evolucion</h6>
+                        <app-input [condicion]="formulario.get('idEvolution')?.hasError('required') && formulario.get('idEvolution')?.touched"
+                            [formName]="'idEvolution'" [nombreLabel]="'Descripcion:'" [tipoInput]="'number'"
+                            [mensaje]="'El id de evolucion es requerido'" [formulario]="formulario"></app-input>
+                    </div> 
+                    <div *ngIf="!existePokemon" class="d-flex justify-content-center mt-2 form-group">
+                        <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
+                        <button class="btn btn-primary w-50 btnActive" type="submit" [disabled]="formulario.invalid">Save</button>
+                    </div>
                 </form>
             </div>
-            <div *ngIf="!existePokemon" class="d-flex justify-content-center mt-2 ">
-                <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
-                <button class="btn btn-primary w-50 btnActive" type="submit" [disabled]="formulario.invalid">Save</button>
-            </div> 
             <div *ngIf="existePokemon" class="d-flex justify-content-center mt-2 ">
                 <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
                 <button class="btn btn-primary w-50 btnActive" (click)="modificar(pokemon)">Update</button>

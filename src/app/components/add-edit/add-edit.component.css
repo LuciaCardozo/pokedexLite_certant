@@ -7,13 +7,17 @@ color: #0275d8;
 }
 
 .labelEvolution{
+    text-align: center;
     border:1px solid rgb(162, 159, 159);
-    height: 5rem;
-    width: 25%;
-    display: flex;
+    height: 10rem;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    color: #0275d8; 
+    margin: 5px;
+}
+
+.labelEvolution>input{
+    width: 50%;
 }
 
 .labelInputImg{
