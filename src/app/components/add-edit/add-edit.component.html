@@ -21,9 +21,9 @@
                         <app-input [nombreLabel]="'Tipo'" [condicion]="formulario.get('types')?.hasError('required') && formulario.get('types')?.touched"
                         [formName]="'types'" [mensaje]="'El tipo es requerido'" 
                         [tipoInput]="'text'" [formulario]="formulario"></app-input>
-                        <app-input [condicion]="formulario.get('idEvolution')?.hasError('required') && formulario.get('idEvolution')?.touched"
-                            [formName]="'idEvolution'" [nombreLabel]="'Id de evolucion'" [tipoInput]="'number'"
-                            [mensaje]="'El id de evolucion es requerido'" [formulario]="formulario"></app-input>
+                        <div class="mt-2 mb-2">
+                            <h5>"Id de evolucion"</h5><input type="number" formControlName="idEvolution" class="form-control">
+                        </div>
                     </div>
                     <h4 class="inputContainerAlta mt-2">Habilidades</h4>
                     <div class="inputContainerAlta ">  
@@ -36,7 +36,7 @@
                     </div>
                     <div class="d-flex justify-content-center mt-2 form-group">
                         <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
-                        <button class="btn btn-primary w-50 btnActive" type="submit" [disabled]="formulario.invalid">Save</button>
+                        <button class="btn btn-primary w-50 btnActive" type="submit">Save</button>
                     </div>
                 </form>
             </div>

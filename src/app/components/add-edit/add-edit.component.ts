@@ -86,23 +86,32 @@ export class AddEditComponent implements OnInit {
   }
 
   altaPokemon() {
-    let nuevoPokemon = {
-      "pokemon": {
-        id: this.apiPokemon.ultimoId++,
-        name: this.formulario.value.name,
-        lvl: Number(this.formulario.value.lvl),
-        evolutionId: this.formulario.value.idEvolution,
-        abilities: [{
-          name: this.formulario.value.abilityName,
-          description: this.formulario.value.abilityDescription
-        }],
-        type: [this.formulario.value.types],
-        image: this.imagenASubir
-      },
-      "userId": this.apiPokemon.userId
-    };
-    this.apiPokemon.postSwagger(nuevoPokemon).then();
-    this.volverAlMenu();
+    if(this.formulario.value.name == "" && this.formulario.value.lvl == 0 && this.formulario.value.types == ""
+    && this.formulario.value.abilityDescription == "" && this.formulario.value.abilityName == ""){
+      this.toast.show("Completa el campo", { classname: 'bg-danger', "delay": "2000" });
+    }else{
+      if(this.formulario.value.idEvolution < 0 || this.formulario.value.lvl <= 0){
+        this.toast.show("Solo se acepta un valor positivo", { classname: 'bg-warning', "delay": "2000" });
+      }else{
+        let nuevoPokemon = {
+          "pokemon": {
+            id: this.apiPokemon.ultimoId++,
+            name: this.formulario.value.name,
+            lvl: Number(this.formulario.value.lvl),
+            evolutionId:  Number(this.formulario.value.idEvolution),
+            abilities: [{
+              name: this.formulario.value.abilityName,
+              description: this.formulario.value.abilityDescription
+            }],
+            type: [this.formulario.value.types],
+            image: this.imagenASubir?this.imagenASubir:"https://cdn.domestika.org/c_limit,dpr_auto,f_auto,q_auto,w_820/v1410117402/content-items/000/671/812/00logo-original.jpg?1410117402"
+          },
+          "userId": this.apiPokemon.userId
+        };
+        this.apiPokemon.postSwagger(nuevoPokemon).then();
+        this.volverAlMenu();
+      }
+    }
   }
 
   modificar(pokemon: any) {
