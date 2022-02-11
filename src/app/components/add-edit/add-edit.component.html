@@ -4,9 +4,9 @@
         <app-title-decoration [title]="'New pokemon'"></app-title-decoration>
         <div class="divPokemon">
             <div class="pokemonCard">
-                <form [formGroup]="formulario" (ngSubmit)="altaPokemon()" *ngIf="!existePokemon">
+                <form [formGroup]="formulario" (ngSubmit)="addPokemon()" *ngIf="!existePokemon">
                     <div class="custom-input-file">
-                        <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
+                        <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="uploadImage($event)">
                         <label class="labelInputImg" for="inputImg">Subir Imagen</label>
                     </div>
                     <div class="inputContainerAlta">
@@ -35,7 +35,7 @@
                             [mensaje]="'La descripcion es requerida'" [formulario]="formulario"></app-input>
                     </div>
                     <div class="d-flex justify-content-center mt-2 form-group">
-                        <button class="btn btn-danger w-50 btnActive" (click)="volverAlMenu()">Volver</button>
+                        <button class="btn btn-danger w-50 btnActive" [routerLink]="['/home']">Volver</button>
                         <button class="btn btn-primary w-50 btnActive" type="submit">Save</button>
                     </div>
                 </form>
@@ -50,7 +50,7 @@
                     <h5>Nombre</h5><input type="text" class="form-control" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="nombreAEditar">
                 </div>
                 <div class="custom-input-file">
-                    <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="cargarImagen($event)">
+                    <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="uploadImage($event)">
                     <label class="labelInputImg" disabled><img src={{pokemon.image}} width="100px" height="100px" alt=""></label>
                 </div><hr>
                 <div class="inputItemsEdit">
@@ -86,16 +86,16 @@
                 </div> 
                 <div *ngIf="!pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn">
                     <app-input-con-boton [titulo]="'Evoluciones'" [subTitulo]="'Id de Evolucion'" [tipoInput]="'number'"
-                    (seAcepto)="agregarIdEvolucion(pokemon,$event)" [nombreBoton]="'Agregar'"></app-input-con-boton>
+                    (seAcepto)="addIdEvolution(pokemon,$event)" [nombreBoton]="'Agregar'"></app-input-con-boton>
                 </div><hr>
                 <div class="d-flex justify-content-center mt-2 form-group">
-                    <button class="btn btn-danger w-50" (click)="volverAlMenu()">Volver</button>
-                    <button class="btn btn-primary w-50" (click)="modificar(pokemon)">Update</button>
+                    <button class="btn btn-danger w-50" [routerLink]="['/home']">Volver</button>
+                    <button class="btn btn-primary w-50" (click)="modifyPokemon(pokemon)">Update</button>
                 </div>
                 <app-modal [condicion]="eliminarTipo" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
-                    (seAcepto)="deleteType(pokemon,tipoSeleccionado)" (seRechazo)="cerrarPop()"></app-modal>
+                    (seAcepto)="deleteType(pokemon,tipoSeleccionado)" (seRechazo)="closePopup()"></app-modal>
                 <app-modal [condicion]="eliminarEvolucion" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar esta evolucion?'"
-                    (seAcepto)="eliminarIdEvolucion(pokemon)" (seRechazo)="cerrarPop()"></app-modal>
+                    (seAcepto)="removeIdEvolution(pokemon)" (seRechazo)="closePopup()"></app-modal>
             </div>
         </div> 
     </div>

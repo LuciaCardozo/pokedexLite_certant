@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { DefaultService, PokemonService, SecurityService } from '../swaggerApi';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ export class ApiPokemonService {
   emailUsuarioLogeado: any;
   userId:any;
 
-  constructor(private swaggerApi:PokemonService, private apiClient:SecurityService) { }
+  constructor(private swaggerApi:PokemonService, private apiClient:SecurityService,
+    private router: Router,private toast: ToastService) { }
 
   ngOnInit(): void { }
 
@@ -25,11 +28,25 @@ export class ApiPokemonService {
   }
 
   async postSwagger(pokemon:any){
-    return await this.swaggerApi.pokemonPOST(pokemon, 'body').subscribe();
+    return await this.swaggerApi.pokemonPOST(pokemon, 'body').subscribe({
+      next: ()=>{
+        this.router.navigate(['/home']);
+      },
+      error: ()=>{
+        this.toast.show("Upp! algo salio mal (Error Post)", { classname: 'bg-danger', "delay": "2000" });
+      }
+    });
   }
 
   async putSwagger(pokemon:any){
-    return await this.swaggerApi.pokemonPUT(pokemon).subscribe();
+    return await this.swaggerApi.pokemonPUT(pokemon).subscribe({
+      next: ()=>{
+        this.router.navigate(['/home']);
+      },
+      error: ()=>{
+        this.toast.show("Upp! algo salio mal (Error Put)", { classname: 'bg-danger', "delay": "2000" });
+      }
+    });
   }
 
 }
