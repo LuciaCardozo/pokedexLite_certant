@@ -98,7 +98,7 @@ export class AddEditComponent implements OnInit {
             type: [this.formulario.value.types],
             image: this.imageToUpload?this.imageToUpload:"https://cdn.domestika.org/c_limit,dpr_auto,f_auto,q_auto,w_820/v1410117402/content-items/000/671/812/00logo-original.jpg?1410117402"
           },
-          "userId": this.apiPokemon.userId
+          "userId": String(this.apiPokemon.userId)
         };
         this.apiPokemon.postSwagger(nuevoPokemon).subscribe({
           next: ()=>{
