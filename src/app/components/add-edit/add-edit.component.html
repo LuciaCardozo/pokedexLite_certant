@@ -68,7 +68,7 @@
                     (seAcepto)="addType(pokemon,$event)" [nombreBoton]="'Agregar'"></app-input-con-boton>
                     <label >Seleccione el tipo a editar:</label>
                     <ul class="ulSeleccionTipo">
-                        <li (click)="tipoSeleccionado=type" *ngFor="let type of pokemon.type">{{type}}
+                        <li (click)="selectedType=type" *ngFor="let type of pokemon.type">{{type}}
                             <button class="btn btn-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
                         </li>
                     </ul>
@@ -93,7 +93,7 @@
                     <button class="btn btn-primary w-50" (click)="modifyPokemon(pokemon)">Update</button>
                 </div>
                 <app-modal [condicion]="eliminarTipo" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
-                    (seAcepto)="deleteType(pokemon,tipoSeleccionado)" (seRechazo)="closePopup()"></app-modal>
+                    (seAcepto)="deleteType(pokemon,selectedType)" (seRechazo)="closePopup()"></app-modal>
                 <app-modal [condicion]="eliminarEvolucion" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar esta evolucion?'"
                     (seAcepto)="removeIdEvolution(pokemon)" (seRechazo)="closePopup()"></app-modal>
             </div>

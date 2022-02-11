@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
@@ -10,9 +10,9 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./add-edit.component.css']
 })
 export class AddEditComponent implements OnInit {
-  imagenASubir: any;
+  imageToUpload: any;
   pokemon:any = [];
-  tipoSeleccionado: string = "";
+  selectedType: string = "";
   nombreAEditar: string = "";
   eliminarTipo: boolean = false;
   eliminarEvolucion:boolean = false;
@@ -22,7 +22,7 @@ export class AddEditComponent implements OnInit {
   evolucionNueva:number = 0;
 
   constructor(private apiPokemon: ApiPokemonService,
-    private router: Router, private toast: ToastService, private fb: FormBuilder) {
+    private toast: ToastService, private fb: FormBuilder,private router: Router) {
       this.formulario = this.fb.group({
       idEvolution: ["",Validators.required],
       types: ["", Validators.required],
@@ -48,7 +48,7 @@ export class AddEditComponent implements OnInit {
       pokemon.type.splice(index, 1);
     }
     this.eliminarTipo = false;
-    this.tipoSeleccionado = "";
+    this.selectedType = "";
   }
 
   addType(pokemon: any, type:any) {
@@ -67,14 +67,14 @@ export class AddEditComponent implements OnInit {
   }
 
   closePopup() {
-    this.tipoSeleccionado = "";
+    this.selectedType = "";
     this.eliminarTipo = false;
     this.eliminarEvolucion =false
   }
 
   uploadImage(event:any) {
     let archivoCapturado = event.target.files[0];
-    this.imagenASubir = "assets/"+archivoCapturado.name;
+    this.imageToUpload = "assets/"+archivoCapturado.name;
   }
 
   addPokemon() {
@@ -96,11 +96,18 @@ export class AddEditComponent implements OnInit {
               description: this.formulario.value.abilityDescription
             }],
             type: [this.formulario.value.types],
-            image: this.imagenASubir?this.imagenASubir:"https://cdn.domestika.org/c_limit,dpr_auto,f_auto,q_auto,w_820/v1410117402/content-items/000/671/812/00logo-original.jpg?1410117402"
+            image: this.imageToUpload?this.imageToUpload:"https://cdn.domestika.org/c_limit,dpr_auto,f_auto,q_auto,w_820/v1410117402/content-items/000/671/812/00logo-original.jpg?1410117402"
           },
           "userId": this.apiPokemon.userId
         };
-        this.apiPokemon.postSwagger(nuevoPokemon).then();
+        this.apiPokemon.postSwagger(nuevoPokemon).subscribe({
+          next: ()=>{
+            this.router.navigate(['/home']);
+          },
+          error: ()=>{
+            this.toast.show("Upp! algo salio mal (Error Post)", { classname: 'bg-danger', "delay": "2000" });
+          }
+        });
       }
     }
   }
@@ -115,7 +122,14 @@ export class AddEditComponent implements OnInit {
       type: pokemon.type,
       image: pokemon.image
     };
-    this.apiPokemon.putSwagger(pokemonEditado).then();
+    this.apiPokemon.putSwagger(pokemonEditado).subscribe({
+      next: ()=>{
+        this.router.navigate(['/home']);
+      },
+      error: ()=>{
+        this.toast.show("Upp! algo salio mal (Error Post)", { classname: 'bg-danger', "delay": "2000" });
+      }
+    });
   }
 
   removeIdEvolution(pokemon:any){

@@ -14,8 +14,7 @@ export class ApiPokemonService {
   emailUsuarioLogeado: any;
   userId:any;
 
-  constructor(private swaggerApi:PokemonService, private apiClient:SecurityService,
-    private router: Router,private toast: ToastService) { }
+  constructor(private swaggerApi:PokemonService, private apiClient:SecurityService) { }
 
   ngOnInit(): void { }
 
@@ -27,26 +26,12 @@ export class ApiPokemonService {
     return this.swaggerApi.pokemonGet(id);
   }
 
-  async postSwagger(pokemon:any){
-    return await this.swaggerApi.pokemonPOST(pokemon, 'body').subscribe({
-      next: ()=>{
-        this.router.navigate(['/home']);
-      },
-      error: ()=>{
-        this.toast.show("Upp! algo salio mal (Error Post)", { classname: 'bg-danger', "delay": "2000" });
-      }
-    });
+  postSwagger(pokemon:any){
+    return this.swaggerApi.pokemonPOST(pokemon, 'body');
   }
 
-  async putSwagger(pokemon:any){
-    return await this.swaggerApi.pokemonPUT(pokemon).subscribe({
-      next: ()=>{
-        this.router.navigate(['/home']);
-      },
-      error: ()=>{
-        this.toast.show("Upp! algo salio mal (Error Put)", { classname: 'bg-danger', "delay": "2000" });
-      }
-    });
+   putSwagger(pokemon:any){
+    return this.swaggerApi.pokemonPUT(pokemon);
   }
 
 }
