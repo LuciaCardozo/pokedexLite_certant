@@ -11,7 +11,7 @@ import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 })
 export class HomeComponent implements OnInit {
   list: Pokemon[] = [];
-  username:string = "";
+  username?:string;
   constructor(private router: Router, private apiPokemon: ApiPokemonService, private carousel:NgbCarouselConfig) {
     this.carousel.interval = 2500;
     this.username = this.apiPokemon.emailUserRegistered;
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   IrAAgregar(){
-    this.apiPokemon.selectedPokemon = null;
+    this.apiPokemon.selectedPokemon = {};
     this.router.navigate(['/addEdit']);
   }
 }

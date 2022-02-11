@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Client } from '../class/client';
-import { InlineResponse200, Pokemon, PokemonBody, PokemonService, SecurityService } from '../swaggerApi';
+import { Pokemon } from '../class/pokemon';
+import { InlineResponse200, PokemonBody, PokemonService, SecurityService } from '../swaggerApi';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,9 @@ import { InlineResponse200, Pokemon, PokemonBody, PokemonService, SecurityServic
 
 export class ApiPokemonService {
   lastId:number=10;
-  selectedPokemon:any;
-  listPokemon:any = [];
-  emailUserRegistered: any;
+  selectedPokemon:Pokemon = new Pokemon;
+  listPokemon:Pokemon[] = [];
+  emailUserRegistered:string = "";
   userIdRegistered:number = 0;
 
   constructor(private swaggerApi:PokemonService, private apiClient:SecurityService) { }

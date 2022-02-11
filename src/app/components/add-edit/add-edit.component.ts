@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Pokemon } from 'src/app/class/pokemon';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -33,12 +34,11 @@ export class AddEditComponent implements OnInit {
 
   async ngOnInit() {
     this.pokemon = this.apiPokemon.selectedPokemon;
-    if(this.pokemon) {
+    if(this.pokemon.id) {
       this.pokemonExists = true;
       this.evolvedPokemon = this.apiPokemon.listPokemon.find((poke:any)=>poke.id==this.pokemon.evolutionId);
     }else {
       this.pokemonExists = false;
-      this.toast.show("No se encontraron pokemones", { classname: 'bg-danger', "delay": "2000" });
     }
   }
 
