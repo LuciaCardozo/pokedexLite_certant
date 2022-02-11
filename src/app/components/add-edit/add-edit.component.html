@@ -4,35 +4,35 @@
         <app-title-decoration [title]="'New pokemon'"></app-title-decoration>
         <div class="divPokemon">
             <div class="pokemonCard">
-                <form [formGroup]="formulario" (ngSubmit)="addPokemon()" *ngIf="!existePokemon">
+                <form [formGroup]="form" (ngSubmit)="addPokemon()" *ngIf="!existePokemon">
                     <div class="custom-input-file">
                         <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="uploadImage($event)">
                         <label class="labelInputImg" for="inputImg">Subir Imagen</label>
                     </div>
                     <div class="inputContainerAlta">
-                        <app-input [nombreLabel]="'Nombre'" [condicion]="formulario.get('name')?.hasError('required') && formulario.get('name')?.touched"
+                        <app-input [nombreLabel]="'Nombre'" [condicion]="form.get('name')?.hasError('required') && form.get('name')?.touched"
                             [formName]="'name'" [mensaje]="'El nombre es requerido'" 
-                            [tipoInput]="'text'" [formulario]="formulario"></app-input>
-                        <app-input [nombreLabel]="'Lvl'" [condicion]="formulario.get('lvl')?.hasError('required') && formulario.get('lvl')?.touched"
+                            [tipoInput]="'text'" [formulario]="form"></app-input>
+                        <app-input [nombreLabel]="'Lvl'" [condicion]="form.get('lvl')?.hasError('required') && form.get('lvl')?.touched"
                             [formName]="'lvl'" [mensaje]="'El lvl es requerido'" 
-                            [tipoInput]="'number'" [formulario]="formulario"></app-input>
+                            [tipoInput]="'number'" [formulario]="form"></app-input>
                     </div>
                     <div class="inputContainerAlta "> 
-                        <app-input [nombreLabel]="'Tipo'" [condicion]="formulario.get('types')?.hasError('required') && formulario.get('types')?.touched"
+                        <app-input [nombreLabel]="'Tipo'" [condicion]="form.get('types')?.hasError('required') && form.get('types')?.touched"
                         [formName]="'types'" [mensaje]="'El tipo es requerido'" 
-                        [tipoInput]="'text'" [formulario]="formulario"></app-input>
+                        [tipoInput]="'text'" [formulario]="form"></app-input>
                         <div class="mt-2 mb-2">
                             <h5>"Id de evolucion"</h5><input type="number" formControlName="idEvolution" class="form-control">
                         </div>
                     </div>
                     <h4 class="inputContainerAlta mt-2">Habilidades</h4>
                     <div class="inputContainerAlta ">  
-                        <app-input [condicion]="formulario.get('abilityName')?.hasError('required') && formulario.get('abilityName')?.touched"
+                        <app-input [condicion]="form.get('abilityName')?.hasError('required') && form.get('abilityName')?.touched"
                             [formName]="'abilityName'" [nombreLabel]="'Nombre'" [tipoInput]="'text'"
-                            [mensaje]="'El nombre es requerido'" [formulario]="formulario"></app-input>
-                        <app-input [condicion]="formulario.get('abilityDescription')?.hasError('required') && formulario.get('abilityDescription')?.touched"
+                            [mensaje]="'El nombre es requerido'" [formulario]="form"></app-input>
+                        <app-input [condicion]="form.get('abilityDescription')?.hasError('required') && form.get('abilityDescription')?.touched"
                             [formName]="'abilityDescription'" [nombreLabel]="'Descripcion'" [tipoInput]="'text'"
-                            [mensaje]="'La descripcion es requerida'" [formulario]="formulario"></app-input>
+                            [mensaje]="'La descripcion es requerida'" [formulario]="form"></app-input>
                     </div>
                     <div class="d-flex justify-content-center mt-2 form-group">
                         <button class="btn btn-danger w-50 btnActive" [routerLink]="['/home']">Volver</button>
@@ -47,7 +47,7 @@
         <div class="divPokemon">
             <div class="pokemonCard">
                 <div class="inputNombreEdit">
-                    <h5>Nombre</h5><input type="text" class="form-control" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="nombreAEditar">
+                    <h5>Nombre</h5><input type="text" class="form-control" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="editName">
                 </div>
                 <div class="custom-input-file">
                     <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="uploadImage($event)">
@@ -69,20 +69,20 @@
                     <label >Seleccione el tipo a editar:</label>
                     <ul class="ulSeleccionTipo">
                         <li (click)="selectedType=type" *ngFor="let type of pokemon.type">{{type}}
-                            <button class="btn btn-danger" (click)="eliminarTipo=true" type="button">🗑️</button>
+                            <button class="btn btn-danger" (click)="deleteType=true" type="button">🗑️</button>
                         </li>
                     </ul>
                 </div><hr>
                 <div *ngIf="pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn" >
                     <h5>Evoluciones</h5>
                     <Label>Id de Evolucion: {{pokemon.evolutionId}}</Label>
-                    <div class="divDetalleEvolucion flexDirectionColumn " *ngIf="pokemonEvolucion">
-                        <label>{{pokemonEvolucion.name}}</label>
-                        <label>Level: {{pokemonEvolucion.lvl}}</label>
+                    <div class="divDetalleEvolucion flexDirectionColumn " *ngIf="evolvedPokemon">
+                        <label>{{evolvedPokemon.name}}</label>
+                        <label>Level: {{evolvedPokemon.lvl}}</label>
                         <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
-                        <label><img src={{pokemonEvolucion.image}} width="100px" height="100px" alt=""></label>
+                        <label><img src={{evolvedPokemon.image}} width="100px" height="100px" alt=""></label>
                     </div>
-                    <button class="btn btn-danger m-2" (click)="eliminarEvolucion=true" type="button">🗑️</button>
+                    <button class="btn btn-danger m-2" (click)="deleteEvolution=true" type="button">🗑️</button>
                 </div> 
                 <div *ngIf="!pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn">
                     <app-input-con-boton [titulo]="'Evoluciones'" [subTitulo]="'Id de Evolucion'" [tipoInput]="'number'"
@@ -92,9 +92,9 @@
                     <button class="btn btn-danger w-50" [routerLink]="['/home']">Volver</button>
                     <button class="btn btn-primary w-50" (click)="modifyPokemon(pokemon)">Update</button>
                 </div>
-                <app-modal [condicion]="eliminarTipo" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
-                    (seAcepto)="deleteType(pokemon,selectedType)" (seRechazo)="closePopup()"></app-modal>
-                <app-modal [condicion]="eliminarEvolucion" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar esta evolucion?'"
+                <app-modal [condicion]="deleteType" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
+                    (seAcepto)="removeType(pokemon,selectedType)" (seRechazo)="closePopup()"></app-modal>
+                <app-modal [condicion]="deleteEvolution" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar esta evolucion?'"
                     (seAcepto)="removeIdEvolution(pokemon)" (seRechazo)="closePopup()"></app-modal>
             </div>
         </div> 

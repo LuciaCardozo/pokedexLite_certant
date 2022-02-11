@@ -8,4 +8,5 @@ export class Pokemon {
     abilities?: Array<PokemonAbilities>;
     type?: Array<string>;
     image?: string;
+    
 }

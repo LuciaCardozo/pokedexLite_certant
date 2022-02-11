@@ -13,17 +13,17 @@ export class AddEditComponent implements OnInit {
   imageToUpload: any;
   pokemon:any = [];
   selectedType: string = "";
-  nombreAEditar: string = "";
-  eliminarTipo: boolean = false;
-  eliminarEvolucion:boolean = false;
-  pokemonEvolucion:any = [];
+  editName: string = "";
+  deleteType: boolean = false;
+  deleteEvolution:boolean = false;
+  evolvedPokemon:any = [];
   existePokemon: boolean = false;
-  formulario: FormGroup;
+  form: FormGroup;
   evolucionNueva:number = 0;
 
   constructor(private apiPokemon: ApiPokemonService,
     private toast: ToastService, private fb: FormBuilder,private router: Router) {
-      this.formulario = this.fb.group({
+      this.form = this.fb.group({
       idEvolution: ["",Validators.required],
       types: ["", Validators.required],
       name: ["", Validators.required],
@@ -36,18 +36,19 @@ export class AddEditComponent implements OnInit {
     this.pokemon = this.apiPokemon.pokemonSeleccionado;
     if(this.pokemon) {
       this.existePokemon = true;
-      this.pokemonEvolucion = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==this.pokemon.evolutionId);
+      this.evolvedPokemon = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==this.pokemon.evolutionId);
     }else {
       this.existePokemon = false;
+      this.toast.show("No se encontraron pokemones", { classname: 'bg-danger', "delay": "2000" });
     }
   }
 
-  deleteType(pokemon: any, type: string) {
+  removeType(pokemon: any, type: string) {
     let index = pokemon.type.indexOf(type);
     if (index > -1) {
       pokemon.type.splice(index, 1);
     }
-    this.eliminarTipo = false;
+    this.deleteType = false;
     this.selectedType = "";
   }
 
@@ -68,8 +69,8 @@ export class AddEditComponent implements OnInit {
 
   closePopup() {
     this.selectedType = "";
-    this.eliminarTipo = false;
-    this.eliminarEvolucion =false
+    this.deleteType = false;
+    this.deleteEvolution =false
   }
 
   uploadImage(event:any) {
@@ -78,24 +79,24 @@ export class AddEditComponent implements OnInit {
   }
 
   addPokemon() {
-    if(this.formulario.value.name == "" && this.formulario.value.lvl == 0 && this.formulario.value.types == ""
-    && this.formulario.value.abilityDescription == "" && this.formulario.value.abilityName == ""){
+    if(this.form.value.name == "" && this.form.value.lvl == 0 && this.form.value.types == ""
+    && this.form.value.abilityDescription == "" && this.form.value.abilityName == ""){
       this.toast.show("Completa el campo", { classname: 'bg-danger', "delay": "2000" });
     }else {
-      if(this.formulario.value.idEvolution < 0 || this.formulario.value.lvl <= 0){
+      if(this.form.value.idEvolution < 0 || this.form.value.lvl <= 0){
         this.toast.show("Solo se acepta un valor positivo", { classname: 'bg-warning', "delay": "2000" });
       }else {
         let nuevoPokemon = {
           "pokemon": {
             id: this.apiPokemon.ultimoId++,
-            name: this.formulario.value.name,
-            lvl: Number(this.formulario.value.lvl),
-            evolutionId:  Number(this.formulario.value.idEvolution),
+            name: this.form.value.name,
+            lvl: Number(this.form.value.lvl),
+            evolutionId:  Number(this.form.value.idEvolution),
             abilities: [{
-              name: this.formulario.value.abilityName,
-              description: this.formulario.value.abilityDescription
+              name: this.form.value.abilityName,
+              description: this.form.value.abilityDescription
             }],
-            type: [this.formulario.value.types],
+            type: [this.form.value.types],
             image: this.imageToUpload?this.imageToUpload:"https://cdn.domestika.org/c_limit,dpr_auto,f_auto,q_auto,w_820/v1410117402/content-items/000/671/812/00logo-original.jpg?1410117402"
           },
           "userId": String(this.apiPokemon.userId)
@@ -115,7 +116,7 @@ export class AddEditComponent implements OnInit {
   modifyPokemon(pokemon: any) {
     let pokemonEditado = {
       id: pokemon.id,
-      name: this.nombreAEditar ? this.nombreAEditar : pokemon.name,
+      name: this.editName ? this.editName : pokemon.name,
       lvl: pokemon.lvl,
       evolutionId: pokemon.evolutionId,
       abilities: this.pokemon.abilities,
@@ -135,13 +136,13 @@ export class AddEditComponent implements OnInit {
   removeIdEvolution(pokemon:any){
     pokemon.evolutionId = 0;
     this.evolucionNueva = 0;
-    this.eliminarEvolucion = false;
+    this.deleteEvolution = false;
   }
 
   addIdEvolution(pokemon:any,evolucion:number) {
     if(evolucion>0) {
       pokemon.evolutionId = evolucion;
-      this.pokemonEvolucion = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==evolucion);
+      this.evolvedPokemon = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==evolucion);
     } else {
       this.toast.show("Solo se acepta un valor positivo", { classname: 'bg-warning', "delay": "2000" });
     }

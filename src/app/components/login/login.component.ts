@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/services/toast.service';
 import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
+import { Client } from 'src/app/class/client';
 
 
 @Component({
@@ -10,10 +11,7 @@ import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  usuario = {
-    username: '',
-    password: ''
-  };
+  usuario:Client = new Client;
 
   constructor(private database: ApiPokemonService, private router: Router, private toastService: ToastService) { }
 
@@ -37,10 +35,8 @@ export class LoginComponent implements OnInit {
   }
   
   autoCompletarUsuario(username:string,password:string) {
-    this.usuario = {
-      username:username,
-      password:password,
-    }
+    this.usuario.username = username;
+    this.usuario.password = password
   }
 
 }

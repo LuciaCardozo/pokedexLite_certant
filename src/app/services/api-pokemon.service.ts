@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Client } from '../class/client';
-import { DefaultService, Pokemon, PokemonBody, PokemonService, SecurityService } from '../swaggerApi';
-import { ToastService } from './toast.service';
+import { InlineResponse200, Pokemon, PokemonBody, PokemonService, SecurityService } from '../swaggerApi';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +15,21 @@ export class ApiPokemonService {
   userId:number = 0;
 
   constructor(private swaggerApi:PokemonService, private apiClient:SecurityService) { }
-
   ngOnInit(): void { }
 
-  getSwaggerCliente(cliente:Client){
+  getSwaggerCliente(cliente:Client):Observable<InlineResponse200>{
     return this.apiClient.loginPOST(cliente,"body");
   }
 
-  getSwagger(id:number){
+  getSwagger(id:number):Observable<Array<Pokemon>>{
     return this.swaggerApi.pokemonGet(id.toString());
   }
 
-  postSwagger(pokemon:PokemonBody){
+  postSwagger(pokemon:PokemonBody):Observable<any>{
     return this.swaggerApi.pokemonPOST(pokemon, 'body');
   }
 
-   putSwagger(pokemon:Pokemon){
+   putSwagger(pokemon:Pokemon):Observable<any>{
     return this.swaggerApi.pokemonPUT(pokemon);
   }
 
