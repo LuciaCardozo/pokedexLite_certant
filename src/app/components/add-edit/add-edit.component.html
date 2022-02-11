@@ -1,5 +1,5 @@
 <div class="divContainer">
-    <button class="btn btn-danger btnSalir btnActive" (click)="onLogout()">Salir</button>
+    <button class="btn btn-danger btnSalir btnActive" [routerLink]="['/login']">Salir</button>
     <div *ngIf="!existePokemon">
         <app-title-decoration [title]="'New pokemon'"></app-title-decoration>
         <div class="divPokemon">

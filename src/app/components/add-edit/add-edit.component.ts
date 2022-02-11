@@ -72,10 +72,6 @@ export class AddEditComponent implements OnInit {
     this.eliminarEvolucion =false
   }
 
-  onLogout() {
-    this.router.navigate(['/login']);
-  }
-
   uploadImage(event:any) {
     let archivoCapturado = event.target.files[0];
     this.imagenASubir = "assets/"+archivoCapturado.name;

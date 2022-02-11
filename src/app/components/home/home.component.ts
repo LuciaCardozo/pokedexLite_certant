@@ -34,10 +34,6 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/addEdit']);
   }
 
-  onLogout() {
-    this.router.navigate(['/login']);
-  }
-
   IrAAgregar(){
     this.apiPS.pokemonSeleccionado = null;
     this.router.navigate(['/addEdit']);
