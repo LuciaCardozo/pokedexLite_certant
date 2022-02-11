@@ -17,7 +17,7 @@ export class AddEditComponent implements OnInit {
   deleteType: boolean = false;
   deleteEvolution:boolean = false;
   evolvedPokemon:any = [];
-  existePokemon: boolean = false;
+  pokemonExists: boolean = false;
   form: FormGroup;
 
   constructor(private apiPokemon: ApiPokemonService,
@@ -34,10 +34,10 @@ export class AddEditComponent implements OnInit {
   async ngOnInit() {
     this.pokemon = this.apiPokemon.selectedPokemon;
     if(this.pokemon) {
-      this.existePokemon = true;
+      this.pokemonExists = true;
       this.evolvedPokemon = this.apiPokemon.listPokemon.find((poke:any)=>poke.id==this.pokemon.evolutionId);
     }else {
-      this.existePokemon = false;
+      this.pokemonExists = false;
       this.toast.show("No se encontraron pokemones", { classname: 'bg-danger', "delay": "2000" });
     }
   }
@@ -85,7 +85,7 @@ export class AddEditComponent implements OnInit {
       if(this.form.value.idEvolution < 0 || this.form.value.lvl <= 0){
         this.toast.show("Solo se acepta un valor positivo", { classname: 'bg-warning', "delay": "2000" });
       }else {
-        let nuevoPokemon = {
+        let newPokemon = {
           "pokemon": {
             id: this.apiPokemon.lastId++,
             name: this.form.value.name,
@@ -100,7 +100,7 @@ export class AddEditComponent implements OnInit {
           },
           "userId": String(this.apiPokemon.userIdRegistered)
         };
-        this.apiPokemon.postSwagger(nuevoPokemon).subscribe({
+        this.apiPokemon.postSwagger(newPokemon).subscribe({
           next: ()=>{
             this.router.navigate(['/home']);
           },
@@ -113,7 +113,7 @@ export class AddEditComponent implements OnInit {
   }
 
   modifyPokemon(pokemon: any) {
-    let pokemonEditado = {
+    let editedPokemon = {
       id: pokemon.id,
       name: this.editName ? this.editName : pokemon.name,
       lvl: pokemon.lvl,
@@ -122,7 +122,7 @@ export class AddEditComponent implements OnInit {
       type: pokemon.type,
       image: pokemon.image
     };
-    this.apiPokemon.putSwagger(pokemonEditado).subscribe({
+    this.apiPokemon.putSwagger(editedPokemon).subscribe({
       next: ()=>{
         this.router.navigate(['/home']);
       },
@@ -137,10 +137,10 @@ export class AddEditComponent implements OnInit {
     this.deleteEvolution = false;
   }
 
-  addIdEvolution(pokemon:any,evolucion:number) {
-    if(evolucion>0) {
-      pokemon.evolutionId = evolucion;
-      this.evolvedPokemon = this.apiPokemon.listPokemon.find((poke:any)=>poke.id==evolucion);
+  addIdEvolution(pokemon:any,evolution:number) {
+    if(evolution>0) {
+      pokemon.evolutionId = evolution;
+      this.evolvedPokemon = this.apiPokemon.listPokemon.find((poke:any)=>poke.id==evolution);
     } else {
       this.toast.show("Solo se acepta un valor positivo", { classname: 'bg-warning', "delay": "2000" });
     }

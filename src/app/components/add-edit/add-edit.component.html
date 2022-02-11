@@ -1,10 +1,10 @@
 <div class="divContainer">
     <button class="btn btn-danger btnSalir btnActive" [routerLink]="['/login']">Salir</button>
-    <div *ngIf="!existePokemon">
+    <div *ngIf="!pokemonExists">
         <app-title-decoration [title]="'New pokemon'"></app-title-decoration>
         <div class="divPokemon">
             <div class="pokemonCard">
-                <form [formGroup]="form" (ngSubmit)="addPokemon()" *ngIf="!existePokemon">
+                <form [formGroup]="form" (ngSubmit)="addPokemon()">
                     <div class="custom-input-file">
                         <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="uploadImage($event)">
                         <label class="labelInputImg" for="inputImg">Subir Imagen</label>
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="existePokemon">
+    <div *ngIf="pokemonExists">
         <app-title-decoration [title]="'Edit Pokemon'"></app-title-decoration>
         <div class="divPokemon">
             <div class="pokemonCard">
