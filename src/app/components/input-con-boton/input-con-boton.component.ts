@@ -7,19 +7,19 @@ import { AddEditComponent } from '../add-edit/add-edit.component';
   styleUrls: ['./input-con-boton.component.css']
 })
 export class InputConBotonComponent implements OnInit {
-  @Input() titulo:string = "";
-  @Input() nombreBoton:string = "";
-  @Input() tipoInput:string = "";
-  @Input() subTitulo:string = "";
-  variableInput:string = "";
-  @Output() seAcepto:EventEmitter<any> = new EventEmitter<any>();
+  @Input() title:string = "";
+  @Input() nameButton:string = "";
+  @Input() inputType:string = "";
+  @Input() subTitle:string = "";
+  inputValue:string = "";
+  @Output() agree:EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  aceptar(){
-    this.seAcepto.emit(this.variableInput);
-    this.variableInput = "";
+  accept(){
+    this.agree.emit(this.inputValue);
+    this.inputValue = "";
   }
 }

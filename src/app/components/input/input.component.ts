@@ -6,12 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./input.component.css']
 })
 export class InputComponent implements OnInit {
-  @Input() condicion:any;
+  @Input() condition:any;
   @Input() formName:string = "";
-  @Input() nombreLabel:string = "";
-  @Input() mensaje:string = "";
-  @Input() formulario:any;
-  @Input() tipoInput:string = "";
+  @Input() nameLabel:string = "";
+  @Input() message:string = "";
+  @Input() form:any;
+  @Input() inputType:string = "";
   constructor() { }
 
   ngOnInit(): void {

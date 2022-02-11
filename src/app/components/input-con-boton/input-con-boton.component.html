@@ -1,8 +1,8 @@
-<h5>{{titulo}}</h5>
-<label>{{subTitulo}}</label>
+<h5>{{title}}</h5>
+<label>{{subTitle}}</label>
 <div class="input-group mb-2 d-flex justify-content-center">
-    <input type="{{tipoInput}}" min="1" class="form-control" [(ngModel)]="variableInput">
+    <input type="{{inputType}}" min="1" class="form-control" [(ngModel)]="inputValue">
     <div class="input-group-append" >
-        <button class="btn btn-outline-danger" type="button" (click)="aceptar()">{{nombreBoton}}</button>
+        <button class="btn btn-outline-danger" type="button" (click)="accept()">{{nameButton}}</button>
     </div>
 </div>

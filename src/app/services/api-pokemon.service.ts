@@ -8,17 +8,17 @@ import { InlineResponse200, Pokemon, PokemonBody, PokemonService, SecurityServic
 })
 
 export class ApiPokemonService {
-  ultimoId:number=10;
-  pokemonSeleccionado:any;
-  listaPokemones:any = [];
-  emailUsuarioLogeado: any;
-  userId:number = 0;
+  lastId:number=10;
+  selectedPokemon:any;
+  listPokemon:any = [];
+  emailUserRegistered: any;
+  userIdRegistered:number = 0;
 
   constructor(private swaggerApi:PokemonService, private apiClient:SecurityService) { }
   ngOnInit(): void { }
 
-  getSwaggerCliente(cliente:Client):Observable<InlineResponse200>{
-    return this.apiClient.loginPOST(cliente,"body");
+  getSwaggerCliente(client:Client):Observable<InlineResponse200>{
+    return this.apiClient.loginPOST(client,"body");
   }
 
   getSwagger(id:number):Observable<Array<Pokemon>>{

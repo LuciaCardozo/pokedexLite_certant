@@ -11,19 +11,19 @@ import { Client } from 'src/app/class/client';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  usuario:Client = new Client;
+  user:Client = new Client;
 
-  constructor(private database: ApiPokemonService, private router: Router, private toastService: ToastService) { }
+  constructor(private apiPokemon: ApiPokemonService, private router: Router, private toastService: ToastService) { }
 
   ngOnInit() { }
 
-  loginConValidacion() {
-    if(this.usuario.username == "" && this.usuario.password == "") {
+  loginWithValidation() {
+    if(this.user.username == "" && this.user.password == "") {
       this.toastService.show("Por favor llene los campos", {classname:'bg-warning', "delay":"1000"});
     } else {
-      this.database.getSwaggerCliente(this.usuario).subscribe({
+      this.apiPokemon.getSwaggerCliente(this.user).subscribe({
         next: (res) => {
-          this.database.userId = Number(res.userId);
+          this.apiPokemon.userIdRegistered = Number(res.userId);
           this.router.navigate(['/home']);
           this.toastService.show("Bienvenid@ "+res.username, {classname:'bg-success', "delay":"1500"});
         },
@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
     }
   }
   
-  autoCompletarUsuario(username:string,password:string) {
-    this.usuario.username = username;
-    this.usuario.password = password
+  userAutocomplete(username:string,password:string) {
+    this.user.username = username;
+    this.user.password = password
   }
 
 }

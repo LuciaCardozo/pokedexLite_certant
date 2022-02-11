@@ -19,7 +19,6 @@ export class AddEditComponent implements OnInit {
   evolvedPokemon:any = [];
   existePokemon: boolean = false;
   form: FormGroup;
-  evolucionNueva:number = 0;
 
   constructor(private apiPokemon: ApiPokemonService,
     private toast: ToastService, private fb: FormBuilder,private router: Router) {
@@ -33,10 +32,10 @@ export class AddEditComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.pokemon = this.apiPokemon.pokemonSeleccionado;
+    this.pokemon = this.apiPokemon.selectedPokemon;
     if(this.pokemon) {
       this.existePokemon = true;
-      this.evolvedPokemon = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==this.pokemon.evolutionId);
+      this.evolvedPokemon = this.apiPokemon.listPokemon.find((poke:any)=>poke.id==this.pokemon.evolutionId);
     }else {
       this.existePokemon = false;
       this.toast.show("No se encontraron pokemones", { classname: 'bg-danger', "delay": "2000" });
@@ -88,7 +87,7 @@ export class AddEditComponent implements OnInit {
       }else {
         let nuevoPokemon = {
           "pokemon": {
-            id: this.apiPokemon.ultimoId++,
+            id: this.apiPokemon.lastId++,
             name: this.form.value.name,
             lvl: Number(this.form.value.lvl),
             evolutionId:  Number(this.form.value.idEvolution),
@@ -99,7 +98,7 @@ export class AddEditComponent implements OnInit {
             type: [this.form.value.types],
             image: this.imageToUpload?this.imageToUpload:"https://cdn.domestika.org/c_limit,dpr_auto,f_auto,q_auto,w_820/v1410117402/content-items/000/671/812/00logo-original.jpg?1410117402"
           },
-          "userId": String(this.apiPokemon.userId)
+          "userId": String(this.apiPokemon.userIdRegistered)
         };
         this.apiPokemon.postSwagger(nuevoPokemon).subscribe({
           next: ()=>{
@@ -135,14 +134,13 @@ export class AddEditComponent implements OnInit {
 
   removeIdEvolution(pokemon:any){
     pokemon.evolutionId = 0;
-    this.evolucionNueva = 0;
     this.deleteEvolution = false;
   }
 
   addIdEvolution(pokemon:any,evolucion:number) {
     if(evolucion>0) {
       pokemon.evolutionId = evolucion;
-      this.evolvedPokemon = this.apiPokemon.listaPokemones.find((poke:any)=>poke.id==evolucion);
+      this.evolvedPokemon = this.apiPokemon.listPokemon.find((poke:any)=>poke.id==evolucion);
     } else {
       this.toast.show("Solo se acepta un valor positivo", { classname: 'bg-warning', "delay": "2000" });
     }

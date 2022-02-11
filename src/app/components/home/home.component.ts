@@ -10,18 +10,18 @@ import { ApiPokemonService } from 'src/app/services/api-pokemon.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  lista: Pokemon[] = [];
+  list: Pokemon[] = [];
   username:string = "";
-  constructor(private router: Router, private apiPS: ApiPokemonService, private carousel:NgbCarouselConfig) {
+  constructor(private router: Router, private apiPokemon: ApiPokemonService, private carousel:NgbCarouselConfig) {
     this.carousel.interval = 2500;
-    this.username = this.apiPS.emailUsuarioLogeado;
+    this.username = this.apiPokemon.emailUserRegistered;
   }
 
   async ngOnInit() {
-    this.apiPS.getSwagger(this.apiPS.userId).subscribe({
+    this.apiPokemon.getSwagger(this.apiPokemon.userIdRegistered).subscribe({
       next: (res) => {
-        this.lista = res.filter((poke)=>poke != null)
-        this.apiPS.listaPokemones = this.lista;
+        this.list = res.filter((poke)=>poke != null)
+        this.apiPokemon.listPokemon = this.list;
       },
       error: (error) =>{
         console.log("No se pudo cargar los pokemones, error:",error);
@@ -29,13 +29,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  public seleccionarPokemon(pokemon: Pokemon) {
-    this.apiPS.pokemonSeleccionado = pokemon
+  public selectPokemon(pokemon: Pokemon) {
+    this.apiPokemon.selectedPokemon = pokemon
     this.router.navigate(['/addEdit']);
   }
 
   IrAAgregar(){
-    this.apiPS.pokemonSeleccionado = null;
+    this.apiPokemon.selectedPokemon = null;
     this.router.navigate(['/addEdit']);
   }
 }

@@ -10,29 +10,29 @@
                         <label class="labelInputImg" for="inputImg">Subir Imagen</label>
                     </div>
                     <div class="inputContainerAlta">
-                        <app-input [nombreLabel]="'Nombre'" [condicion]="form.get('name')?.hasError('required') && form.get('name')?.touched"
-                            [formName]="'name'" [mensaje]="'El nombre es requerido'" 
-                            [tipoInput]="'text'" [formulario]="form"></app-input>
-                        <app-input [nombreLabel]="'Lvl'" [condicion]="form.get('lvl')?.hasError('required') && form.get('lvl')?.touched"
-                            [formName]="'lvl'" [mensaje]="'El lvl es requerido'" 
-                            [tipoInput]="'number'" [formulario]="form"></app-input>
+                        <app-input [nameLabel]="'Nombre'" [condition]="form.get('name')?.hasError('required') && form.get('name')?.touched"
+                            [formName]="'name'" [message]="'El nombre es requerido'" 
+                            [inputType]="'text'" [form]="form"></app-input>
+                        <app-input [nameLabel]="'Lvl'" [condition]="form.get('lvl')?.hasError('required') && form.get('lvl')?.touched"
+                            [formName]="'lvl'" [message]="'El lvl es requerido'" 
+                            [inputType]="'number'" [form]="form"></app-input>
                     </div>
                     <div class="inputContainerAlta "> 
-                        <app-input [nombreLabel]="'Tipo'" [condicion]="form.get('types')?.hasError('required') && form.get('types')?.touched"
-                        [formName]="'types'" [mensaje]="'El tipo es requerido'" 
-                        [tipoInput]="'text'" [formulario]="form"></app-input>
+                        <app-input [nameLabel]="'Tipo'" [condition]="form.get('types')?.hasError('required') && form.get('types')?.touched"
+                        [formName]="'types'" [message]="'El tipo es requerido'" 
+                        [inputType]="'text'" [form]="form"></app-input>
                         <div class="mt-2 mb-2">
                             <h5>"Id de evolucion"</h5><input type="number" formControlName="idEvolution" class="form-control">
                         </div>
                     </div>
                     <h4 class="inputContainerAlta mt-2">Habilidades</h4>
                     <div class="inputContainerAlta ">  
-                        <app-input [condicion]="form.get('abilityName')?.hasError('required') && form.get('abilityName')?.touched"
-                            [formName]="'abilityName'" [nombreLabel]="'Nombre'" [tipoInput]="'text'"
-                            [mensaje]="'El nombre es requerido'" [formulario]="form"></app-input>
-                        <app-input [condicion]="form.get('abilityDescription')?.hasError('required') && form.get('abilityDescription')?.touched"
-                            [formName]="'abilityDescription'" [nombreLabel]="'Descripcion'" [tipoInput]="'text'"
-                            [mensaje]="'La descripcion es requerida'" [formulario]="form"></app-input>
+                        <app-input [condition]="form.get('abilityName')?.hasError('required') && form.get('abilityName')?.touched"
+                            [formName]="'abilityName'" [nameLabel]="'Nombre'" [inputType]="'text'"
+                            [message]="'El nombre es requerido'" [form]="form"></app-input>
+                        <app-input [condition]="form.get('abilityDescription')?.hasError('required') && form.get('abilityDescription')?.touched"
+                            [formName]="'abilityDescription'" [nameLabel]="'Descripcion'" [inputType]="'text'"
+                            [message]="'La descripcion es requerida'" [form]="form"></app-input>
                     </div>
                     <div class="d-flex justify-content-center mt-2 form-group">
                         <button class="btn btn-danger w-50 btnActive" [routerLink]="['/home']">Volver</button>
@@ -64,8 +64,8 @@
                     </div>
                 </div><hr>
                 <div class="inputItemsEdit flexDirectionColumn">
-                    <app-input-con-boton [titulo]="'Tipo'" [tipoInput]="'text'"
-                    (seAcepto)="addType(pokemon,$event)" [nombreBoton]="'Agregar'"></app-input-con-boton>
+                    <app-input-con-boton [title]="'Tipo'" [inputType]="'text'"
+                    (agree)="addType(pokemon,$event)" [nameButton]="'Agregar'"></app-input-con-boton>
                     <label >Seleccione el tipo a editar:</label>
                     <ul class="ulSeleccionTipo">
                         <li (click)="selectedType=type" *ngFor="let type of pokemon.type">{{type}}
@@ -85,17 +85,17 @@
                     <button class="btn btn-danger m-2" (click)="deleteEvolution=true" type="button">🗑️</button>
                 </div> 
                 <div *ngIf="!pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn">
-                    <app-input-con-boton [titulo]="'Evoluciones'" [subTitulo]="'Id de Evolucion'" [tipoInput]="'number'"
-                    (seAcepto)="addIdEvolution(pokemon,$event)" [nombreBoton]="'Agregar'"></app-input-con-boton>
+                    <app-input-con-boton [title]="'Evoluciones'" [subTitle]="'Id de Evolucion'" [inputType]="'number'"
+                    (agree)="addIdEvolution(pokemon,$event)" [nameButton]="'Agregar'"></app-input-con-boton>
                 </div><hr>
                 <div class="d-flex justify-content-center mt-2 form-group">
                     <button class="btn btn-danger w-50" [routerLink]="['/home']">Volver</button>
                     <button class="btn btn-primary w-50" (click)="modifyPokemon(pokemon)">Update</button>
                 </div>
-                <app-modal [condicion]="deleteType" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar este tipo?'"
-                    (seAcepto)="removeType(pokemon,selectedType)" (seRechazo)="closePopup()"></app-modal>
-                <app-modal [condicion]="deleteEvolution" [title]="'Pokedex-Lite'" [mensaje]="'Queres eliminar esta evolucion?'"
-                    (seAcepto)="removeIdEvolution(pokemon)" (seRechazo)="closePopup()"></app-modal>
+                <app-modal [condition]="deleteType" [title]="'Pokedex-Lite'" [message]="'Queres eliminar este tipo?'"
+                    (accept)="removeType(pokemon,selectedType)" (refuse)="closePopup()"></app-modal>
+                <app-modal [condition]="deleteEvolution" [title]="'Pokedex-Lite'" [message]="'Queres eliminar esta evolucion?'"
+                    (accept)="removeIdEvolution(pokemon)" (refuse)="closePopup()"></app-modal>
             </div>
         </div> 
     </div>

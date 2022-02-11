@@ -8,12 +8,12 @@
     </div>
     <div class="divContainerPokemon">
         <div class="divPokemon">
-            <div class="pokemonCard" (click)="seleccionarPokemon(pok)" *ngFor="let pok of lista">
+            <div class="pokemonCard" (click)="selectPokemon(pokemon)" *ngFor="let pokemon of list">
                 <div>
-                    <h3>{{pok.name}}</h3>
-                    <img width="200px" src={{pok.image}} alt="img-pokemon"><br>
-                    <label>Level: {{pok.lvl}}</label><br>
-                    <label>Tipos: {{pok.type}}</label>
+                    <h3>{{pokemon.name}}</h3>
+                    <img width="200px" src={{pokemon.image}} alt="img-pokemon"><br>
+                    <label>Level: {{pokemon.lvl}}</label><br>
+                    <label>Tipos: {{pokemon.type}}</label>
                 </div>
             </div>
         </div>

@@ -6,21 +6,21 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
   @Input() title:string = "";
-  @Input() mensaje:string = "";
-  @Input() condicion:any;
-  @Output() seAcepto:EventEmitter<any> = new EventEmitter<any>();
-  @Output() seRechazo:EventEmitter<any> = new EventEmitter<any>();
+  @Input() message:string = "";
+  @Input() condition:any;
+  @Output() agree:EventEmitter<any> = new EventEmitter<any>();
+  @Output() rejection:EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit(): void { }
 
-  aceptar(){
-    this.seAcepto.emit();
+  accept(){
+    this.agree.emit();
   }
 
-  rechazar(){
-    this.seRechazo.emit();
+  refuse(){
+    this.rejection.emit();
   }
   
 }
