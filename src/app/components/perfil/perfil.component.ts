@@ -29,7 +29,7 @@ export class PerfilComponent implements OnInit {
   }
 
   modificarUsuario(){
-    if(this.lastname == "" || this.name == ""){
+    if(this.lastname == "" && this.name == ""){
       this.toast.show("No has completado los campos para modificar", { classname: 'bg-warning', "delay": "2000" });
     }else{
       let editUser = {
