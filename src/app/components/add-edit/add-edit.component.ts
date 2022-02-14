@@ -78,8 +78,8 @@ export class AddEditComponent implements OnInit {
   }
 
   addPokemon() {
-    if(this.form.value.name == "" && this.form.value.lvl == 0 && this.form.value.types == ""
-    && this.form.value.abilityDescription == "" && this.form.value.abilityName == ""){
+    if(this.form.value.name == "" || this.form.value.types == ""
+    || this.form.value.abilityDescription == "" || this.form.value.abilityName == ""){
       this.toast.show("Completa el campo", { classname: 'bg-danger', "delay": "2000" });
     }else {
       if(this.form.value.idEvolution < 0 || this.form.value.lvl <= 0){
@@ -87,7 +87,7 @@ export class AddEditComponent implements OnInit {
       }else {
         let newPokemon = {
           "pokemon": {
-            id: this.apiPokemon.lastId++,
+            id: Number(this.apiPokemon.lastId++),
             name: this.form.value.name,
             lvl: Number(this.form.value.lvl),
             evolutionId:  Number(this.form.value.idEvolution),
@@ -98,26 +98,26 @@ export class AddEditComponent implements OnInit {
             type: [this.form.value.types],
             image: this.imageToUpload?this.imageToUpload:"https://cdn.domestika.org/c_limit,dpr_auto,f_auto,q_auto,w_820/v1410117402/content-items/000/671/812/00logo-original.jpg?1410117402"
           },
-          "userId": String(this.apiPokemon.userIdRegistered)
+          "userId": this.apiPokemon.userIdRegistered
         };
         this.apiPokemon.postSwagger(newPokemon).subscribe({
           next: ()=>{
             this.router.navigate(['/home']);
           },
           error: ()=>{
-            this.toast.show("Upp! algo salio mal (Error Post)", { classname: 'bg-danger', "delay": "2000" });
+            this.toast.show("Upp! algo salio mal (Error PostPokemon)", { classname: 'bg-danger', "delay": "2000" });
           }
         });
       }
     }
   }
 
-  modifyPokemon(pokemon: any) {
+  modifyPokemon(pokemon: Pokemon) {
     let editedPokemon = {
       id: pokemon.id,
       name: this.editName ? this.editName : pokemon.name,
       lvl: pokemon.lvl,
-      evolutionId: pokemon.evolutionId,
+      evolutionId: Number(pokemon.evolutionId),
       abilities: this.pokemon.abilities,
       type: pokemon.type,
       image: pokemon.image

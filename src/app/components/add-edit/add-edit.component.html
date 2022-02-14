@@ -35,8 +35,8 @@
                             [message]="'La descripcion es requerida'" [form]="form"></app-input>
                     </div>
                     <div class="d-flex justify-content-center mt-2 form-group">
-                        <button class="btn btn-danger w-50 btnActive" [routerLink]="['/home']">Volver</button>
-                        <button class="btn btn-primary w-50 btnActive" type="submit">Save</button>
+                        <button class="btn btn-info w-50 btnActive" [routerLink]="['/home']">←Home</button>
+                        <button class="btn btn-success w-50 btnActive" type="submit">Save</button>
                     </div>
                 </form>
             </div>
@@ -89,13 +89,13 @@
                     (agree)="addIdEvolution(pokemon,$event)" [nameButton]="'Agregar'"></app-input-con-boton>
                 </div><hr>
                 <div class="d-flex justify-content-center mt-2 form-group">
-                    <button class="btn btn-danger w-50" [routerLink]="['/home']">Volver</button>
-                    <button class="btn btn-primary w-50" (click)="modifyPokemon(pokemon)">Update</button>
+                    <button class="btn btn-info w-50" [routerLink]="['/home']">←Home</button>
+                    <button class="btn btn-success w-50" (click)="modifyPokemon(pokemon)">Update</button>
                 </div>
                 <app-modal [condition]="deleteType" [title]="'Pokedex-Lite'" [message]="'Queres eliminar este tipo?'"
-                    (accept)="removeType(pokemon,selectedType)" (refuse)="closePopup()"></app-modal>
+                    (agree)="removeType(pokemon,selectedType)" (rejection)="closePopup()"></app-modal>
                 <app-modal [condition]="deleteEvolution" [title]="'Pokedex-Lite'" [message]="'Queres eliminar esta evolucion?'"
-                    (accept)="removeIdEvolution(pokemon)" (refuse)="closePopup()"></app-modal>
+                    (agree)="removeIdEvolution(pokemon)" (rejection)="closePopup()"></app-modal>
             </div>
         </div> 
     </div>

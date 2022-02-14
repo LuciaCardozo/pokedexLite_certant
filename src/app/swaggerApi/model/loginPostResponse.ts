@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface InlineResponse500 { 
-    code?: number;
-    message?: string;
+export interface LoginPostResponse { 
+    username?: string;
+    userId?: string;
 }

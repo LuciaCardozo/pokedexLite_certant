@@ -10,7 +10,10 @@
  * Do not edit the class manually.
  */
 
-export interface InlineResponse500 { 
-    code?: number;
-    message?: string;
+export interface UserPostRequest { 
+    role?: Array<string>;
+    firstName?: string;
+    lastName?: string;
+    username?: string;
+    password?: string;
 }

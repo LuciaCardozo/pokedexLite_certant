@@ -1,0 +1,30 @@
+<div class="contenedor">
+    <div>
+        <app-title-decoration [title]="'Register'"></app-title-decoration>
+        <div class="divRegister">
+            <div>
+                <form [formGroup]="form" (ngSubmit)="registerUser()">
+                    <app-input [nameLabel]="'FirstName'" [condition]="form.get('firstName')?.hasError('required') && form.get('firstName')?.touched"
+                        [formName]="'firstName'" [message]="'El nombre es requerido'" 
+                        [inputType]="'text'" [form]="form"></app-input>
+                    <app-input [nameLabel]="'LastName'" [condition]="form.get('lastName')?.hasError('required') && form.get('lastName')?.touched"
+                        [formName]="'lastName'" [message]="'El Apellido es requerido'" 
+                        [inputType]="'text'" [form]="form"></app-input>
+                    <app-input [nameLabel]="'Role'" [condition]="form.get('role')?.hasError('required') && form.get('role')?.touched"
+                        [formName]="'role'" [message]="'El rol es requerido'" 
+                        [inputType]="'text'" [form]="form"></app-input>
+                    <app-input [nameLabel]="'Username'" [condition]="form.get('username')?.hasError('required') && form.get('username')?.touched"
+                        [formName]="'username'" [message]="'El Username es requerido'" 
+                        [inputType]="'text'" [form]="form"></app-input>
+                    <app-input [nameLabel]="'Password'" [condition]="form.get('password')?.hasError('required') && form.get('password')?.touched"
+                        [formName]="'password'" [message]="'El Password es requerido'" 
+                        [inputType]="'text'" [form]="form"></app-input>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button class="btn btn-outline-primary" [routerLink]="['/login']">←Login</button>
+                        <button class="btn btn-warning btn-block btnActive" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

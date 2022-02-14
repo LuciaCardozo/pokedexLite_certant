@@ -57,7 +57,11 @@
     right: 1rem;
     top:1rem;
 }
-
+.btnPerfil{
+    position: absolute;
+    right: 6rem;
+    top:1rem;
+}
 .divBoton{
     width: 80%;
     display: flex;

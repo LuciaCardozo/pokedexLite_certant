@@ -18,15 +18,15 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { InlineResponse500 } from '../model/inlineResponse500';
-import { Pokemon } from '../model/pokemon';
-import { PokemonBody } from '../model/pokemonBody';
+import { User } from '../model/user';
+import { UserPostRequest } from '../model/userPostRequest';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class PokemonService {
+export class UserService {
 
     protected basePath = '/pokedex-api';
     public defaultHeaders = new HttpHeaders();
@@ -58,25 +58,15 @@ export class PokemonService {
 
 
     /**
-     * Retrieves all pokemons given a specific user
+     * Retrieves all users that match the criteria
      * 
-     * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pokemonGet(userId: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Pokemon>>;
-    public pokemonGet(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Pokemon>>>;
-    public pokemonGet(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Pokemon>>>;
-    public pokemonGet(userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling pokemonGet.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (userId !== undefined && userId !== null) {
-            queryParameters = queryParameters.set('userId', <any>userId);
-        }
+    public userGet(observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
+    public userGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
+    public userGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
+    public userGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -93,9 +83,8 @@ export class PokemonService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<Pokemon>>('get',`${this.basePath}/pokemon`,
+        return this.httpClient.request<Array<User>>('get',`${this.basePath}/user`,
             {
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -105,16 +94,16 @@ export class PokemonService {
     }
 
     /**
-     * Creates a new pokemon in the system
+     * Creates a new user
      * 
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pokemonPost(body?: PokemonBody, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public pokemonPost(body?: PokemonBody, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public pokemonPost(body?: PokemonBody, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public pokemonPost(body?: PokemonBody, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public userPost(body?: UserPostRequest, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public userPost(body?: UserPostRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public userPost(body?: UserPostRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public userPost(body?: UserPostRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -137,7 +126,7 @@ export class PokemonService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('post',`${this.basePath}/pokemon`,
+        return this.httpClient.request<User>('post',`${this.basePath}/user`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -149,16 +138,62 @@ export class PokemonService {
     }
 
     /**
-     * Edits a pokemon information in the system
+     * Retrieves a user
      * 
+     * @param userId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public userUserIdGet(userId: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public userUserIdGet(userId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public userUserIdGet(userId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public userUserIdGet(userId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling userUserIdGet.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<User>('get',`${this.basePath}/user/${encodeURIComponent(String(userId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Edits a user information
+     * 
+     * @param userId 
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pokemonPut(body?: Pokemon, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public pokemonPut(body?: Pokemon, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public pokemonPut(body?: Pokemon, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public pokemonPut(body?: Pokemon, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public userUserIdPut(userId: string, body?: User, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public userUserIdPut(userId: string, body?: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public userUserIdPut(userId: string, body?: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public userUserIdPut(userId: string, body?: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling userUserIdPut.');
+        }
 
 
         let headers = this.defaultHeaders;
@@ -181,7 +216,7 @@ export class PokemonService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('put',`${this.basePath}/pokemon`,
+        return this.httpClient.request<any>('put',`${this.basePath}/user/${encodeURIComponent(String(userId))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

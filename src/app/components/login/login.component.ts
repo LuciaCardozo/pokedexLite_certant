@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.apiPokemon.getSwaggerCliente(this.user).subscribe({
         next: (res) => {
-          this.apiPokemon.userIdRegistered = Number(res.userId);
+          this.apiPokemon.userIdRegistered = String(res.userId);
           this.router.navigate(['/home']);
           this.toastService.show("Bienvenid@ "+res.username, {classname:'bg-success', "delay":"1500"});
         },

@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Client } from '../class/client';
 import { Pokemon } from '../class/pokemon';
-import { InlineResponse200, PokemonBody, PokemonService, SecurityService } from '../swaggerApi';
+import { PokemonService } from '../swaggerApi/api/pokemon.service';
+import { LoginPostResponse } from '../swaggerApi/model/loginPostResponse';
+import { PokemonBody } from '../swaggerApi/model/pokemonBody';
+import { SecurityService } from '../swaggerApi/api/security.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +16,25 @@ export class ApiPokemonService {
   selectedPokemon:Pokemon = new Pokemon;
   listPokemon:Pokemon[] = [];
   emailUserRegistered:string = "";
-  userIdRegistered:number = 0;
+  userIdRegistered:string = "";
 
   constructor(private swaggerApi:PokemonService, private apiClient:SecurityService) { }
   ngOnInit(): void { }
 
-  getSwaggerCliente(client:Client):Observable<InlineResponse200>{
+  getSwaggerCliente(client:Client):Observable<LoginPostResponse>{
     return this.apiClient.loginPOST(client,"body");
   }
 
-  getSwagger(id:number):Observable<Array<Pokemon>>{
-    return this.swaggerApi.pokemonGet(id.toString());
+  getSwagger(id:string):Observable<Array<Pokemon>>{
+    return this.swaggerApi.pokemonGet(id);
   }
 
   postSwagger(pokemon:PokemonBody):Observable<any>{
-    return this.swaggerApi.pokemonPOST(pokemon, 'body');
+    return this.swaggerApi.pokemonPost(pokemon, 'body');
   }
 
    putSwagger(pokemon:Pokemon):Observable<any>{
-    return this.swaggerApi.pokemonPUT(pokemon);
+    return this.swaggerApi.pokemonPut(pokemon);
   }
 
 }

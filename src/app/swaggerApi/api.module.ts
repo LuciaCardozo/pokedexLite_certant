@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { DefaultService } from './api/default.service';
 import { PokemonService } from './api/pokemon.service';
 import { SecurityService } from './api/security.service';
+import { UserService } from './api/user.service';
 
 @NgModule({
   imports:      [],
@@ -14,7 +15,8 @@ import { SecurityService } from './api/security.service';
   providers: [
     DefaultService,
     PokemonService,
-    SecurityService ]
+    SecurityService,
+    UserService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {

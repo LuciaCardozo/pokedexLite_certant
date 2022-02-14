@@ -1,0 +1,16 @@
+<div class="contenedor">
+    <div>
+        <app-title-decoration [title]="'User profile'"></app-title-decoration>
+        <div class="divPerfil">  
+            <label >First name: </label><input type="text" placeholder="{{usuarioLogeado.firstName}}" [(ngModel)]="name">
+            <label >Last name: </label><input type="text" placeholder="{{usuarioLogeado.lastName}}" [(ngModel)]="lastname">
+            <label >Pokemon count: </label><input type="text" placeholder="{{usuarioLogeado.pokemonCount}}" disabled>
+            <label >Role: </label><input type="text" placeholder="{{usuarioLogeado.role}}" disabled>
+            <label >Username: </label><input type="text" placeholder="{{usuarioLogeado.username}}" disabled>
+            <div class="d-flex justify-content-end mt-3">
+                <button class="btn btn-info" [routerLink]="['/home']">←Home</button>
+                <button class="btn btn-success btn-block btnActive" (click)="modificarUsuario()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

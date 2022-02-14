@@ -17,6 +17,8 @@ import { InputComponent } from './components/input/input.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { TitleDecorationComponent } from './components/title-decoration/title-decoration.component';
 import { InputConBotonComponent } from './components/input-con-boton/input-con-boton.component';
+import { RegisterComponent } from './components/register/register.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDFS-2rJTcwby8d9K0PY6cw82haLpsfKOQ",
@@ -39,7 +41,9 @@ appId: "1:645397347517:web:7e5290e77b6530c9484bd4"
     InputComponent,
     ModalComponent,
     TitleDecorationComponent,
-    InputConBotonComponent
+    InputConBotonComponent,
+    RegisterComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
