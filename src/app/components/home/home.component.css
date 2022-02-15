@@ -1,9 +1,9 @@
-.divContainer{   
+.divContainer {   
     height: 100vh;
     background: linear-gradient(336deg,rgb(240, 227, 108),rgb(253, 171, 171));
 }
 
-.btnNew{
+.btnNew {
     width: 60px;
     height: 60px;
     border-radius: 50px;
@@ -12,11 +12,11 @@
     border-color: red;
     background-color: transparent;
 }
-.btnNew:active{
+.btnNew:active {
     transform: scale(0.95);
 }
 
-.divPokemon{
+.divPokemon {
     width: 80%;
     box-shadow: 0px 0px 25px 0px #ff0000;
     border-radius: 10px;
@@ -29,40 +29,31 @@
     overflow: scroll;
 }
 
-.divPokemon::-webkit-scrollbar{
+.divPokemon::-webkit-scrollbar {
     display: none;
 }
 
-.pokemonCard{
+.pokemonCard {
     border-radius: 10%;
     background-color: #dc3545;
     width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 1rem;
     max-width: 100%;
     text-align: center;
     color: white;
 }
 
-.divContainerPokemon,.divBotonAgregar{
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-}
-
-.btnSalir{
+.btnSalir {
     position: absolute;
     right: 1rem;
     top:1rem;
 }
-.btnPerfil{
+.btnPerfil {
     position: absolute;
     right: 6rem;
     top:1rem;
 }
-.divBoton{
+.divBoton {
     width: 80%;
     display: flex;
     justify-content: end;

@@ -8,9 +8,8 @@
       left:auto; right: auto; margin-left: auto; margin-right: auto;
       top: 0; z-index: 999;"
     >
-      <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
+    <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
         <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
-      </ng-template>
-
-      <ng-template #text>{{ toast.textOrTpl }}</ng-template>
+    </ng-template>
+    <ng-template #text>{{ toast.textOrTpl }}</ng-template>
 </ngb-toast>

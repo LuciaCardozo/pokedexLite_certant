@@ -1,23 +1,20 @@
-.input-file{
+.input-file {
     display: none;
 }
 
-input::placeholder,.card-header,p{
+input::placeholder,.card-header,p {
 color: rgb(175, 38, 38); 
 }
 
-.divContainer{ 
+.divContainer { 
     height: 100vh; 
     width: 100vw;
     background: linear-gradient(336deg,rgb(240, 227, 108),rgb(253, 171, 171));
 }
 
-.labelInputImg{
+.labelInputImg {
     height: 150px;
     width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-shadow: -2px -2px 4px #ec2f2f; 
     color: rgb(0, 0, 0); 
     cursor: pointer;
@@ -26,7 +23,7 @@ color: rgb(175, 38, 38);
     border-radius: 75px;
 }
 
-.pokemonCard{
+.pokemonCard {
     max-height: 100%;
     height: 70vh;
     width: 50vw;
@@ -39,22 +36,16 @@ color: rgb(175, 38, 38);
     overflow-x: hidden; 
 }
 
-.divPokemon{
+.divPokemon {
     display: flex;
     justify-content: center;
 }
 
-.custom-input-file{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.custom-input-file {
     margin: 5px;
 }
 
-.inputItemsEdit{
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+.inputItemsEdit {
     color: rgb(175, 38, 38); 
     margin: 1rem;
 }
@@ -63,7 +54,7 @@ color: rgb(175, 38, 38);
     border-color: rgb(106, 106, 107);
     border-radius: 10px;
 }
-.ulSeleccionTipo{
+.ulSeleccionTipo {
     cursor: pointer;
 }
 /*alta*/
@@ -81,36 +72,30 @@ color: rgb(175, 38, 38);
     margin: 5px;
 }
 
-.btnSalir{
-    position: absolute;
-    right: 2rem;
-    top:1rem;
-}
-
-.inputNombreEdit{
+.inputNombreEdit {
     color: rgb(175, 38, 38);
     width: 100%;
     display: grid;
     justify-content: center;
 }
 
-.inputNombreEdit>input,h5{
+.inputNombreEdit>input,h5 {
     text-align: center;
     width: 100%; 
 }
-.inputNombreEdit>input{
+.inputNombreEdit>input {
     border-style: outset;
     border-color: yellow;
 }
 
-.divHabilidades{
+.divHabilidades {
     width: 80%;
     border: 1px solid red;
     display: grid;
     justify-content: center;
 }
 
-.popup{
+.popup {
     position: absolute;
     width: 99%;
     height: 99%;

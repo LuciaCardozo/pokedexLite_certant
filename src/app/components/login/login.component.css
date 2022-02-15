@@ -4,15 +4,15 @@ input::placeholder,p,input,a {
     text-align: center;
     background-color: transparent;
 }
-input{
+input {
     border-style: outset;
     border-color: yellow;
 }
-.contenedor{
+.contenedor {
     flex-wrap: wrap;
 }
 
-.imgAutoCompletar{
+.imgAutoCompletar {
     border-radius: 50px; 
     border-style: groove;
     border-color: yellow;
@@ -20,30 +20,24 @@ input{
     height: 90px;
 }
 
-.imgAutoCompletar:active{
+.imgAutoCompletar:active {
     transform: scale(0.95);
 }
 
-a{
+a {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.card{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.card {
     background-color: transparent;
     border: none;
 }
 
-.card-body{
+.card-body {
     width: 50%;
     border-radius: 10px;
     border-style: dashed;
     border-color: red;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
 }

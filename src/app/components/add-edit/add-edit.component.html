@@ -1,13 +1,12 @@
 <div class="divContainer">
-    <button class="btn btn-danger btnSalir btnActive" [routerLink]="['/login']">Salir</button>
     <div *ngIf="!pokemonExists">
         <app-title-decoration [title]="'New pokemon'"></app-title-decoration>
         <div class="divPokemon">
             <div class="pokemonCard">
                 <form [formGroup]="form" (ngSubmit)="addPokemon()">
-                    <div class="custom-input-file">
+                    <div class="custom-input-file flexCenterCenter">
                         <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="uploadImage($event)">
-                        <label class="labelInputImg" for="inputImg">Subir Imagen</label>
+                        <label class="labelInputImg flexCenterCenter" for="inputImg">Subir Imagen</label>
                     </div>
                     <div class="inputContainerAlta">
                         <app-input [nameLabel]="'Nombre'" [condition]="form.get('name')?.hasError('required') && form.get('name')?.touched"
@@ -49,21 +48,21 @@
                 <div class="inputNombreEdit">
                     <h5>Nombre</h5><input type="text" class="form-control" placeholder="{{pokemon?pokemon.name:'Name'}}" [(ngModel)]="editName">
                 </div>
-                <div class="custom-input-file">
+                <div class="custom-input-file flexCenterCenter">
                     <input type="file" accept=".png,.jpg" id="inputImg" class="input-file" (change)="uploadImage($event)">
-                    <label class="labelInputImg" disabled><img src={{pokemon.image}} width="100px" height="100px" alt=""></label>
+                    <label class="labelInputImg flexCenterCenter" disabled><img src={{pokemon.image}} width="100px" height="100px" alt=""></label>
                 </div><hr>
-                <div class="inputItemsEdit">
+                <div class="inputItemsEdit flexCenterCenter">
                     <h5>Level: {{pokemon.lvl}}</h5>
                 </div><hr>
-                <div class="inputItemsEdit flexDirectionColumn">  
+                <div class="inputItemsEdit flexDirectionColumn flexCenterCenter">  
                     <h5 class="mt-2">Habilidades</h5>
                     <div class="divHabilidades" *ngFor="let ability of pokemon.abilities">
                         <label>Nombre: {{ability.name}}</label>
                         <label>Descripcion: {{ability.description}}</label>
                     </div>
                 </div><hr>
-                <div class="inputItemsEdit flexDirectionColumn">
+                <div class="inputItemsEdit flexDirectionColumn flexCenterCenter">
                     <app-input-con-boton [title]="'Tipo'" [inputType]="'text'"
                     (agree)="addType(pokemon,$event)" [nameButton]="'Agregar'"></app-input-con-boton>
                     <label >Seleccione el tipo a editar:</label>
@@ -73,7 +72,7 @@
                         </li>
                     </ul>
                 </div><hr>
-                <div *ngIf="pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn" >
+                <div *ngIf="pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn flexCenterCenter" >
                     <h5>Evoluciones</h5>
                     <Label>Id de Evolucion: {{pokemon.evolutionId}}</Label>
                     <div class="divDetalleEvolucion flexDirectionColumn " *ngIf="evolvedPokemon">
@@ -84,7 +83,7 @@
                     </div>
                     <button class="btn btn-danger m-2" (click)="deleteEvolution=true" type="button">🗑️</button>
                 </div> 
-                <div *ngIf="!pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn">
+                <div *ngIf="!pokemon.evolutionId" class="inputItemsEdit flexDirectionColumn flexCenterCenter">
                     <app-input-con-boton [title]="'Evoluciones'" [subTitle]="'Id de Evolucion'" [inputType]="'number'"
                     (agree)="addIdEvolution(pokemon,$event)" [nameButton]="'Agregar'"></app-input-con-boton>
                 </div><hr>

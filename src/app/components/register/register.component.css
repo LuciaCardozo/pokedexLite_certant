@@ -1,13 +1,8 @@
-.divRegister{
+.divRegister {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
-.divForm{
+.divForm {
     text-align: center;
-    display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     border: dashed;
     border-color: brown;
@@ -15,6 +10,6 @@
     width: 70%;
 }
 
-.divForm>form{
+.divForm>form {
    margin: 8px;
 }
