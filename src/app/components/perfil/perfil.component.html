@@ -3,30 +3,30 @@
         <div class="divContainer1">
             <app-title-decoration [title]="'User profile'"></app-title-decoration>
         </div>
-        <div class="divContainer2">
+        <div class="divContainer2 flexCenterCenter">
             <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
-            <label class="labelInputImg" disabled><img src="../../../assets/company_60906fd44b8e56634415cdc1.png" alt=""></label>
+            <label class="labelInputImg flexCenterCenter" disabled><img src="../../../assets/company_60906fd44b8e56634415cdc1.png" alt=""></label>
         </div>
-        <div class="divContainer3" >
-            <h1>Bienvenid@ {{usuarioLogeado.username}}</h1>
+        <div class="divContainer3 flexCenterCenter fontCursiveNegrita" >
+            <h1 class="fontCursiveNegrita">Bienvenid@ {{usuarioLogeado.username}}</h1>
         </div>
-        <div class="divContainer3">
+        <div class="divContainer3 flexCenterCenter fontCursiveNegrita">
             <div>
                 <label>First name</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.firstName}}" [(ngModel)]="name">
             </div>
         </div>
-        <div class="divContainer4">
+        <div class="divContainer4 gridCenterCenter fontCursiveNegrita">
             <label >Last name</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.lastName}}" [(ngModel)]="lastname">
             <label >Role</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.role}}" disabled>
         </div>
-        <div class="divContainer5">
+        <div class="divContainer5 gridCenterCenter fontCursiveNegrita">
             <label >Username</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.username}}" disabled>        
             <label >Pokemon count</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.pokemonCount}}" disabled>
         </div>
-        <div class="divBtnSave">
+        <div class="divBtnSave flexCenterCenter">
             <button class="btn btn-success" (click)="modificarUsuario()">Boton Save</button>
         </div>
-        <div class="divBtnHome">
+        <div class="divBtnHome flexCenterCenter">
             <button class="btn btn-info" [routerLink]="['/home']">←Home</button></div>
     </div>
 </div>

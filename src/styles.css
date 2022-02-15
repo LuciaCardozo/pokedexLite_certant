@@ -15,14 +15,20 @@
 }
 
 .flexCenterCenter{
-display: flex;
-justify-content: center;
-align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .flexDirectionColumn{
     display: flex;
     flex-direction: column;
+}
+
+.gridCenterCenter{
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
