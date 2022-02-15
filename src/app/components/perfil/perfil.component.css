@@ -47,7 +47,6 @@
     text-align: center;
     width: 50%;
     height: 15%; 
-    float: right;
     font-size: 150%;
 }
 
@@ -62,7 +61,7 @@
     text-align: center;
 }
 
-.divContainer4,.divBtnSave {
+.divContainer4,.divBtnSave,.divContainer3 {
     float: right;
 }
 .divContainer5,.divBtnHome,.divContainer2 {  
