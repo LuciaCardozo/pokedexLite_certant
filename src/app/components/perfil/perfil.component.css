@@ -33,8 +33,7 @@
     height: 25%;
 }
 
-.divContainer2 {
-    float: left;
+.divContainer2,.divContainer4,.divContainer5 {
     width: 50%;
     height: 30%;
 }
@@ -61,13 +60,12 @@
 .divContainer4,.divContainer5 {
     font-size: 150%;
     text-align: center;
-    width: 50%; 
-    height: 30%;
 }
-.divContainer4 {
+
+.divContainer4,.divBtnSave {
     float: right;
 }
-.divContainer5 {  
+.divContainer5,.divBtnHome,.divContainer2 {  
     float: left; 
 }
 
@@ -81,12 +79,7 @@
     width: 50%;
     height: 10%;
 }
-.divBtnSave {
-    float: right;
-}
-.divBtnHome {
-    float: left; 
-}
+
 .divBtnSave>button,.divBtnHome>button {
     height: 70%;
     width: 25%;
