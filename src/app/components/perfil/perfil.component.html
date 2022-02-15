@@ -1,16 +1,32 @@
 <div class="contenedor">
-    <div>
-        <app-title-decoration [title]="'User profile'"></app-title-decoration>
-        <div class="divPerfil">  
-            <label >First name: </label><input type="text" placeholder="{{usuarioLogeado.firstName}}" [(ngModel)]="name">
-            <label >Last name: </label><input type="text" placeholder="{{usuarioLogeado.lastName}}" [(ngModel)]="lastname">
-            <label >Pokemon count: </label><input type="text" placeholder="{{usuarioLogeado.pokemonCount}}" disabled>
-            <label >Role: </label><input type="text" placeholder="{{usuarioLogeado.role}}" disabled>
-            <label >Username: </label><input type="text" placeholder="{{usuarioLogeado.username}}" disabled>
-            <div class="d-flex justify-content-end mt-3">
-                <button class="btn btn-info" [routerLink]="['/home']">←Home</button>
-                <button class="btn btn-success btn-block btnActive" (click)="modificarUsuario()">Save</button>
+    <div class="divPerfil">
+        <div class="divContainer1">
+            <app-title-decoration [title]="'User profile'"></app-title-decoration>
+        </div>
+        <div class="divContainer2">
+            <input type="file" accept=".png,.jpg" id="inputImg" class="input-file">
+            <label class="labelInputImg" disabled><img src="../../../assets/company_60906fd44b8e56634415cdc1.png" alt=""></label>
+        </div>
+        <div class="divContainer3" >
+            <h1>Bienvenid@ {{usuarioLogeado.username}}</h1>
+        </div>
+        <div class="divContainer3">
+            <div>
+                <label>First name</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.firstName}}" [(ngModel)]="name">
             </div>
         </div>
+        <div class="divContainer4">
+            <label >Last name</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.lastName}}" [(ngModel)]="lastname">
+            <label >Role</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.role}}" disabled>
+        </div>
+        <div class="divContainer5">
+            <label >Username</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.username}}" disabled>        
+            <label >Pokemon count</label><input class="form-control" type="text" placeholder="{{usuarioLogeado.pokemonCount}}" disabled>
+        </div>
+        <div class="divBtnSave">
+            <button class="btn btn-success" (click)="modificarUsuario()">Boton Save</button>
+        </div>
+        <div class="divBtnHome">
+            <button class="btn btn-info" [routerLink]="['/home']">←Home</button></div>
     </div>
 </div>

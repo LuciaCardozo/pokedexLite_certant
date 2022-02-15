@@ -19,7 +19,9 @@ import { TitleDecorationComponent } from './components/title-decoration/title-de
 import { InputConBotonComponent } from './components/input-con-boton/input-con-boton.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 const firebaseConfig = {
   apiKey: "AIzaSyDFS-2rJTcwby8d9K0PY6cw82haLpsfKOQ",
 authDomain: "scenic-setup-298622.firebaseapp.com",
@@ -53,7 +55,10 @@ appId: "1:645397347517:web:7e5290e77b6530c9484bd4"
     AngularFireModule.initializeApp(firebaseConfig),
     HttpClientModule,
     ApiModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

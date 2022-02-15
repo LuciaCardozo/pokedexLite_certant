@@ -1,6 +1,20 @@
 .divRegister{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.divForm{
     text-align: center;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    border: dashed;
+    border-color: brown;
+    border-radius: 25px;
+    width: 70%;
+}
+
+.divForm>form{
+   margin: 8px;
 }
